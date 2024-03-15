@@ -1,0 +1,122 @@
+.card {
+    border-radius: 6px;
+    box-shadow: 0 2px 2px rgba(204,197,185,.5);
+    background-color: #fff;
+    color: #252422;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    margin-top: 20px;
+}
+
+    .card .header {
+        padding: 20px 20px 0;
+    }
+
+    .card .title {
+        margin: 0;
+        color: #252422;
+        font-weight: 300;
+    }
+
+    .card .content {
+        padding: 15px 15px 10px;
+    }
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table {
+    background-color: transparent;
+}
+
+.table-full-width {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.card button {
+    border-radius: 10px;
+    border: none;
+    width: max-content;
+    height: max-content;
+    color: white;
+}
+
+    .card button a {
+        text-decoration: none;
+        color: white;
+    }
+
+.green-btn {
+    background-color: #7ac29a;
+}
+
+    .green-btn:hover {
+        background-color: #609879;
+    }
+
+.red-btn {
+    background-color: #eb5e28;
+}
+
+    .red-btn:hover {
+        background-color: #c15226;
+    }
+
+.blue-btn {
+    background-color: #68b3c8;
+}
+
+    .blue-btn:hover {
+        background-color: #508999;
+    }
+
+.yellow-btn {
+    background-color: #f3bb45;
+}
+
+    .yellow-btn:hover {
+        background-color: #bb9135;
+    }
+
+#Search input {
+
+    width: 300px;
+    display: flex;
+    margin-right: 5px;
+}
+#Search button{
+    height: 38px;
+    margin-left: 0px;
+    border-top-left-radius: 0; /* Loại bỏ viền tròn ở góc trên bên phải của input */
+    border-bottom-left-radius: 0;
+
+}
+#Search input[type="text"] {
+    flex: 1; /* Phần tử input sẽ mở rộng để chiếm hết không gian còn lại */
+    margin-right: 0px; /* Khoảng cách giữa input và button */
+    border-top-right-radius: 0; /* Loại bỏ viền tròn ở góc trên bên phải của input */
+    border-bottom-right-radius: 0;
+}
+.form-control:focus {
+    border-color: #dee2e6 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+#Search {
+    float: right;
+    align-items: center;
+    display: flex;
+
+}

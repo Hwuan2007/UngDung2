@@ -1,0 +1,89 @@
+.card {
+    border-radius: 6px;
+    box-shadow: 0 2px 2px rgba(204,197,185,.5);
+    background-color: #fff;
+    color: #252422;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    margin-top: 20px;
+}
+
+    .card .header {
+        padding: 20px 20px 0;
+    }
+
+    .card .title {
+        margin: 0;
+        color: #252422;
+        font-weight: 300;
+    }
+
+    .card .content {
+        padding: 15px 15px 10px;
+    }
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table {
+    background-color: transparent;
+
+}
+
+.table-full-width {
+    margin-left: -15px;
+    margin-right: -15px;
+
+}
+
+.card button {
+    border-radius: 10px;
+    border: none;
+    width: 80px;
+    height: 30px;
+    color: white;
+}
+
+    .card button a {
+        text-decoration: none;
+        color: white;
+    }
+
+.info-form {
+    padding: 20px 10px;
+}
+
+.form-control {
+    background-color: #f9f9f9 !important;
+}
+
+    .form-control:focus {
+        border-color: #ea8125e4 !important; /* Màu viền khi focus tùy chỉnh */
+        box-shadow: 0 0 0 0.2rem rgba(255, 102, 0, 0.25) !important; /* Hiệu ứng shadow khi focus */
+    }
+
+.save-btn {
+    background-color: #7ac29a;
+}
+
+    .save-btn:hover {
+        background-color: #609879;
+    }
+
+.cancel-btn {
+    background-color: #eb5e28;
+}
+
+    .cancel-btn:hover {
+        background-color: #c15226;
+    }
+

@@ -1,0 +1,71 @@
+
+
+@{
+   ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
+}
+<div class="header">
+    <h4 class="title"> Danh Sách Khách Hàng </h4>
+    <br />
+    <div>
+        <a asp-action="Create">
+            <button class="green-btn">
+                <i class="bx bxs-plus-circle"></i>
+                Thêm Khách Hàng
+            </button>
+        </a>
+        <div class="form-group" id="Search">
+            <input  type="text"  placeholder="tìm kiếm" class="form-control"/>
+            <a asp-action="search">
+            <button class="green-btn">
+                <i class='bx bx-search' style="vertical-align: middle;"></i>
+                Tìm Kiếm
+            </button>
+        </a>
+        </div>
+    </div>
+
+    <br />
+    <p>@TempData["Message"]</p>
+</div>
+<div class="content table-responsive table-full-width" style="width: auto !important;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã nhân viên</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Chức vụ</th>
+                <th>Số năm công tác</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nhanVien in Model) // Duyệt qua từng nhân viên trong danh sách
+            {
+                <tr>
+                    <td>@nhanVien.MaNhanVien</td>
+                    <td>@nhanVien.HoTen</td>
+                    <td>@nhanVien.NgaySinh</td>
+                    <td>@nhanVien.SoDienThoai</td>
+                    <td>@nhanVien.DiaChi</td>
+                    <td>@nhanVien.ChucVu</td>
+                    <td>@nhanVien.SoNamCongTac</td>
+                    <td>
+                        <button class="yellow-btn" style="display: inline-block;">
+                            <a asp-action="editcustomer" >sửa</a>
+                        </button>
+                        <button class="red-btn" style="display: inline-block;">
+                            <a asp-action="deletecustomer" >xóa</a>
+                        </button>
+                    </td>
+                </tr> 
+            }     
+        </tbody>
+    </table>
+</div>
+
+
+
