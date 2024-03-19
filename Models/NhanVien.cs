@@ -43,11 +43,7 @@ namespace DataAccess
         }
         private Random random = new Random();
          private List<NhanVien> danhSachNhanVien = new List<NhanVien>(); // Khai báo danh sách nhân viên
-         public void AddNhanVien(NhanVien nhanVien)
-        {
-            danhSachNhanVien.Add(nhanVien);
-        }
-
+         
         public List<NhanVien> GetNhanViens()
         {
             return danhSachNhanVien;
@@ -71,34 +67,40 @@ namespace DataAccess
             return danhSachNhanVien;
         }
 
-        public string UpdateMaNhanVien()
+public string UpdateMaNhanVien()
+{
+    var session = _httpContextAccessor.HttpContext.Session;
+    var danhSachNhanVien = session.GetObject<List<NhanVien>>("DanhSachNhanVien") ?? new List<NhanVien>();
+    string maNhanVienMoi;
+
+    if (danhSachNhanVien.Any())
+    {
+        string maxId = danhSachNhanVien.Select(nv => nv.MaNhanVien).Max();
+        string numId = maxId.Substring(3);
+        int currentNum = int.Parse(numId);
+        int nextNum = currentNum + 1;
+        maNhanVienMoi = "NV-" + nextNum.ToString("0000");
+
+        // Kiểm tra xem mã nhân viên mới đã tồn tại trong danh sách chưa
+        while (danhSachNhanVien.Any(nv => nv.MaNhanVien == maNhanVienMoi))
         {
-            var session = _httpContextAccessor.HttpContext.Session;
-            var maNhanVienList = session.GetObject<List<string>>("MaNhanVienList") ?? new List<string>();
-
-            if (maNhanVienList.Any())
-            {
-                string maxId = maNhanVienList.Max();
-                string numId = maxId.Substring(3);
-                int currentNum = int.Parse(numId);
-                int nextNum = currentNum + 1;
-                string maNhanVienMoi = "NV-" + nextNum.ToString("0000");
-
-                maNhanVienList.Add(maNhanVienMoi);
-                session.SetObject("MaNhanVienList", maNhanVienList);
-
-                return maNhanVienMoi;
-            }
-            else
-            {
-                string maNhanVienMoi = "NV-0001";
-
-                maNhanVienList.Add(maNhanVienMoi);
-                session.SetObject("MaNhanVienList", maNhanVienList);
-
-                return maNhanVienMoi;
-            }
+            // Nếu mã đã tồn tại, tạo mã mới
+            currentNum = int.Parse(maNhanVienMoi.Substring(3));
+            currentNum++;
+            maNhanVienMoi = "NV-" + currentNum.ToString("0000");
         }
+    }
+    else
+    {
+        maNhanVienMoi = "NV-0001";
+    }
+
+    // Trả về mã nhân viên mới
+    return maNhanVienMoi;
+}
+
+
+
 
         //Tạo giới hạn cho ngày sinh 
         private string NgaySinh()

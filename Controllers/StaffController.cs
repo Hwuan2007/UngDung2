@@ -35,7 +35,7 @@ public class StaffController : Controller
             var danhSachNhanVien = session.GetObject<List<NhanVien>>("DanhSachNhanVien");
             if (danhSachNhanVien == null || danhSachNhanVien.Count == 0)
             {
-                
+                Console.WriteLine("k có j");
                 return Content("Không có nhân viên nào trong danh sách.");
             }
             return View(danhSachNhanVien);
@@ -53,27 +53,31 @@ public class StaffController : Controller
     public IActionResult Create(NhanVien model)
     {
         if (ModelState.IsValid)
-    {
-        model.MaNhanVien = _nhanVienDataAccess.UpdateMaNhanVien(); 
-
-        _nhanVienDataAccess.AddNhanVien(model);
-
-        // Lấy danh sáchnhân viên từ session
-        var danhSachNhanVien = HttpContext.Session.GetObject<List<NhanVien>>("DanhSachNhanVien");
-        // Kiểm tra xem danh sách có tồn tại không
-        if (danhSachNhanVien == null)
         {
-            danhSachNhanVien = new List<NhanVien>(); // Khởi tạo danh sách mới nếu chưa tồn tại
-        }
-        // Thêm nhân viên mới vào danh sách
-        danhSachNhanVien.Add(model);
-        // Lưu danh sách nhân viên đã cập nhật vào session
-        HttpContext.Session.SetObject("DanhSachNhanVien", danhSachNhanVien);
+            // Gán mã nhân viên mới
+            model.MaNhanVien = _nhanVienDataAccess.UpdateMaNhanVien();
 
-        return RedirectToAction("Index");
+            // Lấy danh sách nhân viên từ session
+            var danhSachNhanVien = HttpContext.Session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+            if (danhSachNhanVien == null)
+            {
+                danhSachNhanVien = new List<NhanVien>();
+            }
+            
+            // Thêm nhân viên mới vào danh sách
+            danhSachNhanVien.Add(model);
+            
+            // Cập nhật danh sách nhân viên trong session
+            HttpContext.Session.SetObject("DanhSachNhanVien", danhSachNhanVien);
+
+            // Chuyển hướng đến trang Index
+            return RedirectToAction("Index");
+        }
+
+        // Nếu dữ liệu không hợp lệ, trở lại trang Create với model đã nhập
+        return View(model);
     }
-    return View(model);
-    }
+
 
 
         public IActionResult Edit(int id)
