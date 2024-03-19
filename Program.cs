@@ -1,5 +1,8 @@
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using DataAccess;
+using Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -14,6 +17,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<NhanVienDataAccess>();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

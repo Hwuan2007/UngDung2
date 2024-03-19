@@ -71,36 +71,34 @@ namespace DataAccess
             return danhSachNhanVien;
         }
 
-public string UpdateMaNhanVien()
-{
-    var session = _httpContextAccessor.HttpContext.Session;
-    var maNhanVienList = session.GetObject<List<string>>("MaNhanVienList") ?? new List<string>();
+        public string UpdateMaNhanVien()
+        {
+            var session = _httpContextAccessor.HttpContext.Session;
+            var maNhanVienList = session.GetObject<List<string>>("MaNhanVienList") ?? new List<string>();
 
-    if (maNhanVienList.Any())
-    {
-        string maxId = maNhanVienList.Max();
-        string numId = maxId.Substring(3);
-        int currentNum = int.Parse(numId);
-        int nextNum = currentNum + 1;
-        string maNhanVienMoi = "NV-" + nextNum.ToString("0000");
+            if (maNhanVienList.Any())
+            {
+                string maxId = maNhanVienList.Max();
+                string numId = maxId.Substring(3);
+                int currentNum = int.Parse(numId);
+                int nextNum = currentNum + 1;
+                string maNhanVienMoi = "NV-" + nextNum.ToString("0000");
 
-        maNhanVienList.Add(maNhanVienMoi);
-        session.SetObject("MaNhanVienList", maNhanVienList);
+                maNhanVienList.Add(maNhanVienMoi);
+                session.SetObject("MaNhanVienList", maNhanVienList);
 
-        return maNhanVienMoi;
-    }
-    else
-    {
-        string maNhanVienMoi = "NV-0001";
+                return maNhanVienMoi;
+            }
+            else
+            {
+                string maNhanVienMoi = "NV-0001";
 
-        maNhanVienList.Add(maNhanVienMoi);
-        session.SetObject("MaNhanVienList", maNhanVienList);
+                maNhanVienList.Add(maNhanVienMoi);
+                session.SetObject("MaNhanVienList", maNhanVienList);
 
-        return maNhanVienMoi;
-    }
-}
-
-
+                return maNhanVienMoi;
+            }
+        }
 
         //Tạo giới hạn cho ngày sinh 
         private string NgaySinh()

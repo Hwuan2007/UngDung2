@@ -29,35 +29,25 @@ public class StaffController : Controller
             session.SetObject("DanhSachNhanVien", danhSachNhanVien);
         }
     }
-
-    public IActionResult SaveRandomStaffsToSession()
-    {
-        List<NhanVien> danhSachNhanVien = _nhanVienDataAccess.nhanvienngaunhien();
-        // Thêm danh sách nhân viên vào danh sách trong NhanVienDataAccess
-        foreach (var nhanVien in danhSachNhanVien)
-        {
-            _nhanVienDataAccess.AddNhanVien(nhanVien);
-        }
-        HttpContext.Session.SetObject("DanhSachNhanVien", danhSachNhanVien);
-        return RedirectToAction("Index");
-    }
-
     public IActionResult Index()
         {
             var session = _httpContextAccessor.HttpContext.Session;
             var danhSachNhanVien = session.GetObject<List<NhanVien>>("DanhSachNhanVien");
-            if (danhSachNhanVien == null)
+            if (danhSachNhanVien == null || danhSachNhanVien.Count == 0)
             {
+                
                 return Content("Không có nhân viên nào trong danh sách.");
             }
             return View(danhSachNhanVien);
         }
-        [HttpGet]
-        [Route("Create")]
-        public IActionResult Create()
-        {
-            return  View();
-        }
+
+    [HttpGet]
+    [Route("Create")]
+    public IActionResult Create()
+    {
+        return  View();
+    }
+
     [HttpPost]
     [Route("Create")]
     public IActionResult Create(NhanVien model)
@@ -65,10 +55,16 @@ public class StaffController : Controller
         if (ModelState.IsValid)
     {
         model.MaNhanVien = _nhanVienDataAccess.UpdateMaNhanVien(); 
+
         _nhanVienDataAccess.AddNhanVien(model);
 
         // Lấy danh sáchnhân viên từ session
         var danhSachNhanVien = HttpContext.Session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+        // Kiểm tra xem danh sách có tồn tại không
+        if (danhSachNhanVien == null)
+        {
+            danhSachNhanVien = new List<NhanVien>(); // Khởi tạo danh sách mới nếu chưa tồn tại
+        }
         // Thêm nhân viên mới vào danh sách
         danhSachNhanVien.Add(model);
         // Lưu danh sách nhân viên đã cập nhật vào session
