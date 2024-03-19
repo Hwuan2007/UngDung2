@@ -1,3 +1,5 @@
+
+using DataAccess;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -8,6 +10,8 @@ builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(120);
 });
+
+builder.Services.AddScoped<NhanVienDataAccess>();
 
 var app = builder.Build();
 

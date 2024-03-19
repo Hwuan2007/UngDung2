@@ -39,3 +39,4 @@ C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\refint\hocvieccuccangMVC.dll
 C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\hocvieccuccangMVC.pdb
 C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\hocvieccuccangMVC.genruntimeconfig.cache
 C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\ref\hocvieccuccangMVC.dll
+C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\hocvieccuccangMVC.sourcelink.json

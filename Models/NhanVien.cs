@@ -1,3 +1,4 @@
+using Extensions; 
 using System;
 using Models;
 using System.Collections.Generic;
@@ -5,37 +6,28 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
+
 namespace Models
 {
     public class NhanVien
     {
-        public string MaNhanVien { get; set; }
+        public string? MaNhanVien { get; set; }
         [Required(ErrorMessage = "Vui lòng điền đầy đủ thông tin.")]
-        public string HoTen { get; set; }
+        public string? HoTen { get; set; }
         [Required(ErrorMessage = "Vui lòng điền đầy đủ thông tin.")]
-        public string NgaySinh { get; set; }
+        [DataType(DataType.Date)]
+        public string? NgaySinh { get; set; }
         [Required(ErrorMessage = "Vui lòng điền đầy đủ thông tin.")]
         [RegularExpression(@"^\d{10,11}$", ErrorMessage = "Số điện thoại không hợp lệ.")]
-        public string SoDienThoai { get; set; }
+        public string? SoDienThoai { get; set; }
         [Required(ErrorMessage = "Vui lòng điền đầy đủ thông tin.")]
-        public string DiaChi { get; set; }
+        public string? DiaChi { get; set; }
         [Required(ErrorMessage = "Vui lòng điền đầy đủ thông tin.")]
-        public string ChucVu { get; set; }
+        public string? ChucVu { get; set; }
         [Required(ErrorMessage = "Vui lòng điền đầy đủ thông tin.")]
-        public int? SoNamCongTac { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Số năm công tác phải là một số nguyên dương.")]
+        public int SoNamCongTac { get; set; }
         
-        
-
-    //     public bool KiemTraTrungLap(NhanVien nhanVien)
-    //     {
-    //         return this.HoTen == nhanVien.HoTen && this.NgaySinh == nhanVien.NgaySinh;
-    //     }
-
-        
-    //    public NhanVien Clone()
-    //     {
-    //         return (NhanVien)this.MemberwiseClone();
-    //     }
     }
 }
 namespace DataAccess
@@ -44,10 +36,22 @@ namespace DataAccess
 
     public class NhanVienDataAccess
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public NhanVienDataAccess(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
         private Random random = new Random();
-        
          private List<NhanVien> danhSachNhanVien = new List<NhanVien>(); // Khai báo danh sách nhân viên
+         public void AddNhanVien(NhanVien nhanVien)
+        {
+            danhSachNhanVien.Add(nhanVien);
+        }
 
+        public List<NhanVien> GetNhanViens()
+        {
+            return danhSachNhanVien;
+        }
         public List<NhanVien> nhanvienngaunhien()
         {
             List<NhanVien> danhSachNhanVien = new List<NhanVien>();
@@ -60,12 +64,43 @@ namespace DataAccess
                 nhanVien.SoDienThoai = SoDienThoai();
                 nhanVien.DiaChi = "Địa chỉ nhân viên " + (i + 1);
                 nhanVien.ChucVu = "Chức vụ nhân viên " + (i + 1);
-                nhanVien.SoNamCongTac = random.Next(1, 10); 
+                nhanVien.SoNamCongTac = random.Next(1, 10);  
 
                 danhSachNhanVien.Add(nhanVien);
             }
             return danhSachNhanVien;
         }
+
+public string UpdateMaNhanVien()
+{
+    var session = _httpContextAccessor.HttpContext.Session;
+    var maNhanVienList = session.GetObject<List<string>>("MaNhanVienList") ?? new List<string>();
+
+    if (maNhanVienList.Any())
+    {
+        string maxId = maNhanVienList.Max();
+        string numId = maxId.Substring(3);
+        int currentNum = int.Parse(numId);
+        int nextNum = currentNum + 1;
+        string maNhanVienMoi = "NV-" + nextNum.ToString("0000");
+
+        maNhanVienList.Add(maNhanVienMoi);
+        session.SetObject("MaNhanVienList", maNhanVienList);
+
+        return maNhanVienMoi;
+    }
+    else
+    {
+        string maNhanVienMoi = "NV-0001";
+
+        maNhanVienList.Add(maNhanVienMoi);
+        session.SetObject("MaNhanVienList", maNhanVienList);
+
+        return maNhanVienMoi;
+    }
+}
+
+
 
         //Tạo giới hạn cho ngày sinh 
         private string NgaySinh()

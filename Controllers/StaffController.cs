@@ -14,18 +14,42 @@ public class StaffController : Controller
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly NhanVienDataAccess _nhanVienDataAccess;
 
+    
+
     public StaffController(NhanVienDataAccess nhanVienDataAccess, IHttpContextAccessor httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
         _nhanVienDataAccess = nhanVienDataAccess;
 
+        var session = _httpContextAccessor.HttpContext.Session;
+        var danhSachNhanVien = session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+        if (danhSachNhanVien == null)
+        {
+            danhSachNhanVien = _nhanVienDataAccess.nhanvienngaunhien();
+            session.SetObject("DanhSachNhanVien", danhSachNhanVien);
+        }
     }
 
-    
+    public IActionResult SaveRandomStaffsToSession()
+    {
+        List<NhanVien> danhSachNhanVien = _nhanVienDataAccess.nhanvienngaunhien();
+        // Thêm danh sách nhân viên vào danh sách trong NhanVienDataAccess
+        foreach (var nhanVien in danhSachNhanVien)
+        {
+            _nhanVienDataAccess.AddNhanVien(nhanVien);
+        }
+        HttpContext.Session.SetObject("DanhSachNhanVien", danhSachNhanVien);
+        return RedirectToAction("Index");
+    }
 
     public IActionResult Index()
         {
-            var danhSachNhanVien = _nhanVienDataAccess.nhanvienngaunhien(); // Sửa tên phương thức
+            var session = _httpContextAccessor.HttpContext.Session;
+            var danhSachNhanVien = session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+            if (danhSachNhanVien == null)
+            {
+                return Content("Không có nhân viên nào trong danh sách.");
+            }
             return View(danhSachNhanVien);
         }
         [HttpGet]
@@ -34,17 +58,27 @@ public class StaffController : Controller
         {
             return  View();
         }
+    [HttpPost]
+    [Route("Create")]
+    public IActionResult Create(NhanVien model)
+    {
+        if (ModelState.IsValid)
+    {
+        model.MaNhanVien = _nhanVienDataAccess.UpdateMaNhanVien(); 
+        _nhanVienDataAccess.AddNhanVien(model);
 
-        [HttpPost]
-        [Route("Create")]
-        public IActionResult Create(NhanVien model)
-        {
-           if (ModelState.IsValid)
-            {
-               return Content("Đang xây dựng");
-            }
-            return View();
-        }
+        // Lấy danh sáchnhân viên từ session
+        var danhSachNhanVien = HttpContext.Session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+        // Thêm nhân viên mới vào danh sách
+        danhSachNhanVien.Add(model);
+        // Lưu danh sách nhân viên đã cập nhật vào session
+        HttpContext.Session.SetObject("DanhSachNhanVien", danhSachNhanVien);
+
+        return RedirectToAction("Index");
+    }
+    return View(model);
+    }
+
 
         public IActionResult Edit(int id)
         {

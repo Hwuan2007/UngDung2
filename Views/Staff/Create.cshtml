@@ -43,7 +43,7 @@
             <br>
             <div>
                 <label asp-for="SoNamCongTac" >Số Năm Công tác:</label>
-                <input asp-for="SoNamCongTac" type="text" placeholder="Nhập Số năm công tác" class="form-control" />
+                <input asp-for="SoNamCongTac" type="number" placeholder="Nhập Số năm công tác" class="form-control" />
                 <span asp-validation-for="SoNamCongTac" class="text-danger"></span>
             </div>
             <br>
@@ -51,7 +51,7 @@
                 <div class="form-group">
                     <button type="submit" class="save-btn"> Lưu </button>
                     <button type="button" class="cancel-btn"onclick="cancelForm()">
-                            <a asp-action="index"> Hủy </a>
+                            <a asp-action="Index"> Hủy </a>
                     </button>
                 </div>
             </div>
