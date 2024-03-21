@@ -51,10 +51,10 @@ table {
     color: white;
 }
 
-    .card button a {
-        text-decoration: none;
-        color: white;
-    }
+.card button a {
+    text-decoration: none;
+    color: white;
+}
 
 .green-btn {
     background-color: #7ac29a;

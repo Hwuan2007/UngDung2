@@ -20,3 +20,49 @@ html {
 body {
   margin-bottom: 60px;
 }
+.container {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+}
+
+.row {
+  display: flex; 
+}
+
+.col {
+  flex: 1;
+  margin: 0 10px; 
+}
+
+.box {
+  width: 300px;
+  height: 100px;
+  background-color: #ccc;
+  display: flex; /* Sử dụng flexbox layout */
+  justify-content: center; 
+  align-items: center; 
+  border-radius: 50px;
+  border: none;
+  color: white;
+}
+.box a {
+  text-decoration: none;
+  color: white;
+  font-size: large;
+}
+#box1{
+  background-color: #68b3c8;
+}
+#box1:hover{
+  background-color: #508999;
+}
+#box2{
+  background-color: #eb5e28;
+}
+#box2:hover{
+  background-color: #c15226;
+}
+
+
