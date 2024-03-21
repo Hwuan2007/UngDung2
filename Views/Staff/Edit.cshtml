@@ -1,0 +1,63 @@
+ @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+ @model Models.NhanVien
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_EditLayout.cshtml";
+}
+<form method="post" asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="MaNhanVien" />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="HoTen" class="control-label">Tên nguời dùng:</label>
+                <input asp-for="HoTen" type="text"  placeholder="Nhập Họ và Tên" class="form-control" />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="NgaySinh" class="control-label">Ngày Sinh:</label>
+                <input asp-for="NgaySinh" type="text" placeholder="Nhập Ngày Sinh" class="form-control" />
+                <span asp-validation-for="NgaySinh" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="SoDienThoai" class="control-label">Số điện thoại:</label>
+                <input asp-for="SoDienThoai" type="text" placeholder="Nhập Số Điện Thoại" class="form-control" />
+                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+            </div>
+            <br />
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="DiaChi" class="control-label">Địa chỉ:</label>
+                <input asp-for="DiaChi" type="text" placeholder="Nhập Điạ Chỉ" class="form-control" />
+                <span asp-validation-for="DiaChi" class="text-danger"></span>
+            </div>
+            <br>
+            <div>
+                <label asp-for="ChucVu" >CHức vụ:</label>
+                <input asp-for="ChucVu" type="text" placeholder="Nhập Chức vụ" class="form-control" />
+                <span asp-validation-for="ChucVu" class="text-danger"></span>
+            </div>
+            <br>
+            <div>
+                <label asp-for="SoNamCongTac" >Số Năm Công tác:</label>
+                <input asp-for="SoNamCongTac" type="number" placeholder="Nhập Số năm công tác" class="form-control" />
+                <span asp-validation-for="SoNamCongTac" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="btn-chance">
+                <div class="form-group">
+                    <button type="submit" class="save-btn"> Lưu </button>
+                    <button type="button" class="cancel-btn"onclick="cancelForm()">
+                            <a asp-action="Index"> Hủy </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

@@ -15,13 +15,11 @@
             </button>
         </a>
         <div class="form-group" id="Search">
-            <input  type="text"  placeholder="tìm kiếm" class="form-control"/>
-            <a asp-action="search">
-            <button class="green-btn">
+            <input type="text" placeholder="Tìm kiếm" class="form-control" />
+            <button class="green-btn" onclick="search()">
                 <i class='bx bx-search' style="vertical-align: middle;"></i>
                 Tìm Kiếm
             </button>
-        </a>
         </div>
     </div>
 
@@ -55,10 +53,10 @@
                     <td>@nhanVien.SoNamCongTac</td>
                     <td>
                         <button class="yellow-btn" style="display: inline-block;">
-                            <a asp-action="editcustomer" >sửa</a>
+                            <a asp-action="Edit" asp-route-id="@nhanVien.MaNhanVien" >sửa</a>
                         </button>
-                        <button class="red-btn" style="display: inline-block;">
-                            <a asp-action="deletecustomer" >xóa</a>
+                        <button class="red-btn" style="display: inline-block;"onclick="confirmDelete('@nhanVien.MaNhanVien')">
+                            <a asp-action="Delete" asp-route-id="@nhanVien.MaNhanVien" >xóa</a>
                         </button>
                     </td>
                 </tr> 
@@ -66,6 +64,3 @@
         </tbody>
     </table>
 </div>
-
-
-

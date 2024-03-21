@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\CreateLayout.css"
     },
     {
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\EditLayout.css",
+      "PackagePath": "staticwebassets\\css\\EditLayout.css"
+    },
+    {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\StaffLayouts.css",
       "PackagePath": "staticwebassets\\css\\StaffLayouts.css"
     },
@@ -19,6 +23,14 @@
     {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\ConfirmDelete.js",
+      "PackagePath": "staticwebassets\\js\\ConfirmDelete.js"
+    },
+    {
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\Search.js",
+      "PackagePath": "staticwebassets\\js\\Search.js"
     },
     {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\site.js",

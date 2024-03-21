@@ -64,37 +64,81 @@ public class StaffController : Controller
                 danhSachNhanVien = new List<NhanVien>();
             }
             
-            // Thêm nhân viên mới vào danh sách
             danhSachNhanVien.Add(model);
             
-            // Cập nhật danh sách nhân viên trong session
             HttpContext.Session.SetObject("DanhSachNhanVien", danhSachNhanVien);
 
-            // Chuyển hướng đến trang Index
             return RedirectToAction("Index");
         }
 
-        // Nếu dữ liệu không hợp lệ, trở lại trang Create với model đã nhập
         return View(model);
     }
 
 
-
-        public IActionResult Edit(int id)
+        [HttpGet]
+        [Route("Edit/{id}")]
+        public IActionResult Edit(string id)
         {
-            return Content("Đang xây dựng");
+            var danhSachNhanVien = HttpContext.Session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+            var nhanVien = danhSachNhanVien.FirstOrDefault(nv => nv.MaNhanVien == id);
+            
+            if (nhanVien == null)
+            {
+                return NotFound(); // Trả về 404 nếu không tìm thấy nhân viên
+            }
+
+            return View(nhanVien);
         }
 
         [HttpPost]
-        public IActionResult Update(object model)
+        [Route("Edit/{id}")]
+        public IActionResult Edit(string id, NhanVien updatedNhanVien)
         {
-            return Content("Đang xây dựng");
-        }
+            if (ModelState.IsValid)
+            {
+                var danhSachNhanVien = HttpContext.Session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+                var existingNhanVien = danhSachNhanVien.FirstOrDefault(nv => nv.MaNhanVien == id);
+                
+                if (existingNhanVien == null)
+                {
+                    return NotFound(); // Trả về 404 nếu không tìm thấy nhân viên
+                }
 
-        public IActionResult Delete(int id)
-        {
-            return Content("Đang xây dựng");
+                // Cập nhật thông tin của nhân viên trong danh sách
+                existingNhanVien.HoTen = updatedNhanVien.HoTen;
+                existingNhanVien.NgaySinh = updatedNhanVien.NgaySinh;
+                existingNhanVien.SoDienThoai = updatedNhanVien.SoDienThoai;
+                existingNhanVien.DiaChi = updatedNhanVien.DiaChi;
+                existingNhanVien.ChucVu = updatedNhanVien.ChucVu;
+                existingNhanVien.SoNamCongTac = updatedNhanVien.SoNamCongTac;
+
+                HttpContext.Session.SetObject("DanhSachNhanVien", danhSachNhanVien);
+                return RedirectToAction("Index");
+            }
+
+            return View(updatedNhanVien);
         }
+        
+public IActionResult Delete(string id)
+{
+    var session = _httpContextAccessor.HttpContext.Session;
+
+    var danhSachNhanVien = session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+    var nhanVien = danhSachNhanVien.FirstOrDefault(nv => nv.MaNhanVien == id);
+                
+    if (nhanVien != null)
+    {
+        danhSachNhanVien.Remove(nhanVien);
+        session.SetObject("DanhSachNhanVien", danhSachNhanVien);
+        TempData["Message"] = "Nhân viên đã được xóa thành công.";
+    }
+    else
+    {
+        TempData["Message"] = "Không tìm thấy nhân viên cần xóa.";
+    }
+
+    return RedirectToAction("Index");
+}
 
         public IActionResult Report()
         {
