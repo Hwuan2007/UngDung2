@@ -5,9 +5,9 @@ $(document).ready(function() {
         $('input[required]').each(function() {
             if (!$(this).val()) {
                 isValidForm = false;
-                $(this).next('.error-message').text('Vui lòng điền thông tin vào trường này.').show();
+                $(this).next('.text-danger').text('Vui lòng điền đầy đủ thông tin.').show();
             } else {
-                $(this).next('.error-message').hide();
+                $(this).next('.text-danger').hide();
             }
         });
 
@@ -17,18 +17,14 @@ $(document).ready(function() {
 
         var ngaySinh = $('#NgaySinh').val();
         if (!isValidDate(ngaySinh)) {
-            $('#NgaySinh').next('.error-message').text('Định dạng ngày sinh không hợp lệ. Vui lòng nhập lại theo định dạng dd/mm/yyyy.').show();
+            $('#NgaySinh').next('.text-danger').text('Định dạng ngày sinh không hợp lệ. Vui lòng nhập lại theo định dạng dd/mm/yyyy.').show();
             return false;
         } else {
-            $('#NgaySinh').next('.error-message').hide();
+            $('#NgaySinh').next('.text-danger').hide();
         }
     });
 
     function isValidDate(dateString) {
-        if (!dateString) {
-            return false; // Trường input trống
-        }
-
         var pattern = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
         if (!pattern.test(dateString)) {
             return false;

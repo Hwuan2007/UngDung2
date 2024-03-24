@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0bmxceUIoZMuHCJOEBU7tY3YWul/WepfpZQn7+7DA34=",
+  "Hash": "hY2eu343Vrq53Ej9BG+JjyLVmYgQHCBcxGuaMiSnico=",
   "Source": "hocvieccuccangMVC",
   "BasePath": "_content/hocvieccuccangMVC",
   "Mode": "Default",
@@ -150,6 +150,25 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\Check.js",
+      "SourceId": "hocvieccuccangMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
+      "BasePath": "_content/hocvieccuccangMVC",
+      "RelativePath": "js/Check.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Check.js"
+    },
+    {
       "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\ConfirmDelete.js",
       "SourceId": "hocvieccuccangMVC",
       "SourceType": "Discovered",
@@ -205,25 +224,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
-    },
-    {
-      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\ValidDate.js",
-      "SourceId": "hocvieccuccangMVC",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
-      "BasePath": "_content/hocvieccuccangMVC",
-      "RelativePath": "js/ValidDate.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\ValidDate.js"
     },
     {
       "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
