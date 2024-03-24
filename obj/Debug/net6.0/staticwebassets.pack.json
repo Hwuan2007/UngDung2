@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\js\\Search.js"
     },
     {
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\ValidDate.js",
+      "PackagePath": "staticwebassets\\js\\ValidDate.js"
+    },
+    {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -16,7 +16,6 @@ namespace Models
         [Required(ErrorMessage = "Vui lòng điền đầy đủ thông tin.")]
         public string? HoTen { get; set; }
         [Required(ErrorMessage = "Vui lòng điền đầy đủ thông tin.")]
-        [RegularExpression(@"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$", ErrorMessage = "Định dạng ngày không hợp lệ. Vui lòng nhập theo định dạng dd/MM/yyyy.")]
         public string? NgaySinh { get; set; }
         [Required(ErrorMessage = "Vui lòng điền đầy đủ thông tin.")]
         [RegularExpression(@"^\d{10,11}$", ErrorMessage = "Số điện thoại không hợp lệ.")]

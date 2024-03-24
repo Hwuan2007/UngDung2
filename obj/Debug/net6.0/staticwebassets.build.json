@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sZGpo5E29Jtqp0CGHrCW7jbXfdZjn9zL2mEJMAvElOA=",
+  "Hash": "0bmxceUIoZMuHCJOEBU7tY3YWul/WepfpZQn7+7DA34=",
   "Source": "hocvieccuccangMVC",
   "BasePath": "_content/hocvieccuccangMVC",
   "Mode": "Default",
@@ -205,6 +205,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\ValidDate.js",
+      "SourceId": "hocvieccuccangMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
+      "BasePath": "_content/hocvieccuccangMVC",
+      "RelativePath": "js/ValidDate.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\ValidDate.js"
     },
     {
       "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
