@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using DataAccess;
-using Extensions;
+using hocvieccuccangMVC.DataAccess;
+using hocvieccuccangMVC.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

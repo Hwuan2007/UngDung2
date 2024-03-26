@@ -25,16 +25,16 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\Check.js",
-      "PackagePath": "staticwebassets\\js\\Check.js"
-    },
-    {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\ConfirmDelete.js",
       "PackagePath": "staticwebassets\\js\\ConfirmDelete.js"
     },
     {
-      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\Search.js",
-      "PackagePath": "staticwebassets\\js\\Search.js"
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\SearchStaff.js",
+      "PackagePath": "staticwebassets\\js\\SearchStaff.js"
+    },
+    {
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\ValidDate.js",
+      "PackagePath": "staticwebassets\\js\\ValidDate.js"
     },
     {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\site.js",

@@ -1,11 +1,9 @@
-
-
 @{
    ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
 }
 <div class="header">
-    <h4 class="title"> Danh Sách Khách Hàng </h4>
+    <h4 class="title"> Danh Sách Nhân Viên </h4>
     <br />
     <div>
         <a asp-action="Create">
@@ -15,7 +13,7 @@
             </button>
         </a>
         <div class="form-group" id="Search">
-            <input type="text" placeholder="Tìm kiếm" class="form-control" />
+            <input type="text" id="searchInput" placeholder="Tìm kiếm" class="form-control" />
             <button class="green-btn" onclick="search()">
                 <i class='bx bx-search' style="vertical-align: middle;"></i>
                 Tìm Kiếm
@@ -31,17 +29,17 @@
         <thead>
             <tr>
                 <th>Mã nhân viên</th>
-                <th>Họ tên</th>
+                <th id="hoTenColumn">Họ tên</th>
                 <th>Ngày sinh</th>
                 <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
+                <th id="diaChiColumn">Địa chỉ</th>
                 <th>Chức vụ</th>
                 <th>Số năm công tác</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var nhanVien in Model) // Duyệt qua từng nhân viên trong danh sách
+            @foreach (var nhanVien in Model) 
             {
                 <tr>
                     <td>@nhanVien.MaNhanVien</td>
@@ -64,3 +62,5 @@
         </tbody>
     </table>
 </div>
+<script>
+</script>

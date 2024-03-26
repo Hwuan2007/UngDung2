@@ -17,3 +17,13 @@ function search() {
         row.style.display = match ? '' : 'none';
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Lắng nghe sự kiện khi người dùng nhấn phím trong ô nhập liệu tìm kiếm
+    document.getElementById('searchInput').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            search();
+        }
+    });
+});

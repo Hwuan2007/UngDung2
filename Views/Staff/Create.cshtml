@@ -1,5 +1,5 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model Models.NhanVien
+@model hocvieccuccangMVC.Models.NhanVien
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_CreateLayout.cshtml";
@@ -49,7 +49,9 @@
             <div class="btn-chance">
                 <div class="form-group">
                     <button type="submit" class="save-btn"> Lưu </button>
-                    <button type="button" class="cancel-btn" onclick="cancelForm()"> Hủy </button>
+                    <button type="button" class="cancel-btn"onclick="cancelForm()">
+                            <a asp-action="Index"> Hủy </a>
+                    </button>
                 </div>
             </div>
         </div>
