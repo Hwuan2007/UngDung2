@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\js\\ConfirmDelete.js"
     },
     {
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\DeleteMessage.js",
+      "PackagePath": "staticwebassets\\js\\DeleteMessage.js"
+    },
+    {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\SearchStaff.js",
       "PackagePath": "staticwebassets\\js\\SearchStaff.js"
     },
