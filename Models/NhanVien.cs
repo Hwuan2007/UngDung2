@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-
+using HocViec
 namespace hocvieccuccangMVC.Models
 {
     public class NhanVien
