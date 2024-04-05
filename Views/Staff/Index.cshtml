@@ -1,64 +1,104 @@
-@{
-   ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/_StaffLayout.cshtml";
-}
-<div class="header">
-    <h4 class="title"> Danh Sách Nhân Viên </h4>
-    <br />
+@using hocvieccuccangMVC.Models;
+@model hocvieccuccangMVC.ViewModels.NhanVienViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/css/StaffLayout.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+
+</head>
+<body>
     <div>
-        <a asp-action="Create">
-            <button class="green-btn">
-                <i class="bx bxs-plus-circle"></i>
-                Thêm Khách Hàng
-            </button>
-        </a>
-        <div class="form-group" id="Search">
-            <input type="text" id="searchInput" placeholder="Tìm kiếm" class="form-control" />
-            <button class="green-btn" onclick="search()">
-                <i class='bx bx-search' style="vertical-align: middle;"></i>
-                Tìm Kiếm
-            </button>
+        <div class="content">
+            <div class="container-fluid" style="padding: 50px 200px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Danh Sách Nhân Viên</h4>
+                                <br />
+                                <div>
+                                    <button type="button" class="green-btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                                        <i class="bx bxs-plus-circle"></i>
+                                        Thêm Nhân viên mới
+                                    </button>
+                                    
+                                    <div class="form-group" id="Search">
+                                        <input type="text" id="searchInput" placeholder="Tìm kiếm" class="form-control" />
+                                        <button class="green-btn" onclick="search()">
+                                            <i class='bx bx-search' style="vertical-align: middle;"></i>
+                                            Tìm Kiếm
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <p id="message" style="color: red;">@TempData["Message"]</p>
+                            </div>
+
+                            <div class="content table-responsive table-full-width ">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Mã nhân viên</th>
+                                            <th>Họ tên</th>
+                                            <th>Ngày sinh</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Chức vụ</th>
+                                            <th>Số năm công tác</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var nhanVien in Model.DanhSachNhanVien)
+                                        {
+                                            <tr>
+                                                <td>@(nhanVien.MaNhanVien)</td>
+                                                <td>@(nhanVien.HoTen)</td>
+                                                <td>@(nhanVien.NgaySinh)</td>
+                                                <td>@(nhanVien.SoDienThoai)</td>
+                                                <td>@(nhanVien.DiaChi)</td>
+                                                <td>@(nhanVien.ChucVu)</td>
+                                                <td>@(nhanVien.SoNamCongTac)</td>
+                                                <td>
+                                                    <button class="yellow-btn" style="display: inline-block;" data-bs-toggle="modal" data-bs-target="#editEmployeeModal" 
+                                                    onclick="editEmployee('@nhanVien.MaNhanVien', '@nhanVien.HoTen', '@nhanVien.NgaySinh', '@nhanVien.SoDienThoai', '@nhanVien.DiaChi', '@nhanVien.ChucVu', '@nhanVien.SoNamCongTac')">
+                                                        Sửa
+                                                    </button>
+                                                    <button class="red-btn" style="display: inline-block;" onclick="confirmDelete('@nhanVien.MaNhanVien')">
+                                                        <a asp-action="Delete" asp-route-id="@nhanVien.MaNhanVien">Xóa</a>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Modaladd -->
+                            @Html.Partial("Create", Model.NhanVien)
+                            <!-- Modaledit -->
+                            @Html.Partial("Edit", Model.NhanVien)
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</body>
+</html>
 
-    <br />
-     <p id="message"style="color: red;">@TempData["Message"]</p>
-</div>
-<div class="content table-responsive table-full-width" style="width: auto !important;">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Mã nhân viên</th>
-                <th>Họ tên</th>
-                <th>Ngày sinh</th>
-                <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
-                <th>Chức vụ</th>
-                <th>Số năm công tác</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var nhanVien in Model) 
-            {
-                <tr>
-                    <td>@nhanVien.MaNhanVien</td>
-                    <td>@nhanVien.HoTen</td>
-                    <td>@nhanVien.NgaySinh</td>
-                    <td>@nhanVien.SoDienThoai</td>
-                    <td>@nhanVien.DiaChi</td>
-                    <td>@nhanVien.ChucVu</td>
-                    <td>@nhanVien.SoNamCongTac</td>
-                    <td>
-                        <button class="yellow-btn" style="display: inline-block;">
-                            <a asp-action="Edit" asp-route-id="@nhanVien.MaNhanVien" >sửa</a>
-                        </button>
-                        <button class="red-btn" style="display: inline-block;"onclick="confirmDelete('@nhanVien.MaNhanVien')">
-                            <a asp-action="Delete" asp-route-id="@nhanVien.MaNhanVien" >xóa</a>
-                        </button>
-                    </td>
-                </tr> 
-            }     
-        </tbody>
-    </table>
-</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/js/SearchStaff.js"></script>
+<script src="~/js/ConfirmDelete.js"></script>
+<script src="~/js/DeleteMessage.js"></script>
+<script src="~/js/editEmployee.js"></script>
+
+

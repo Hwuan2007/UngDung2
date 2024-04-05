@@ -1,63 +1,72 @@
- @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
- @model hocvieccuccangMVC.Models.NhanVien
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model hocvieccuccangMVC.Models.NhanVien
 
-@{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_EditLayout.cshtml";
-}
-<form method="post" asp-action="Edit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="MaNhanVien" />
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="HoTen" class="control-label">Tên nguời dùng:</label>
-                <input asp-for="HoTen" type="text"  placeholder="Nhập Họ và Tên" class="form-control" />
-                <span asp-validation-for="HoTen" class="text-danger"></span>
+<div class="modal fade" id="editEmployeeModal" tabindex="-1" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editEmployeeModalLabel">Chỉnh sửa thông tin nhân viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <br />
-            <div class="form-group">
-                <label asp-for="NgaySinh" class="control-label">Ngày Sinh:</label>
-                <input asp-for="NgaySinh" type="text" placeholder="Nhập Ngày Sinh" class="form-control" />
-                <span asp-validation-for="NgaySinh" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-group">
-                <label asp-for="SoDienThoai" class="control-label">Số điện thoại:</label>
-                <input asp-for="SoDienThoai" type="text" placeholder="Nhập Số Điện Thoại" class="form-control" />
-                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
-            </div>
-            <br />
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="DiaChi" class="control-label">Địa chỉ:</label>
-                <input asp-for="DiaChi" type="text" placeholder="Nhập Điạ Chỉ" class="form-control" />
-                <span asp-validation-for="DiaChi" class="text-danger"></span>
-            </div>
-            <br>
-            <div>
-                <label asp-for="ChucVu" >CHức vụ:</label>
-                <input asp-for="ChucVu" type="text" placeholder="Nhập Chức vụ" class="form-control" />
-                <span asp-validation-for="ChucVu" class="text-danger"></span>
-            </div>
-            <br>
-            <div>
-                <label asp-for="SoNamCongTac" >Số Năm Công tác:</label>
-                <input asp-for="SoNamCongTac" type="number" placeholder="Nhập Số năm công tác" class="form-control" />
-                <span asp-validation-for="SoNamCongTac" class="text-danger"></span>
-            </div>
-            <br>
-            <div class="btn-chance">
-                <div class="form-group">
-                    <button type="submit" class="save-btn"> Lưu </button>
-                    <button type="button" class="cancel-btn"onclick="cancelForm()">
-                            <a asp-action="Index"> Hủy </a>
-                    </button>
-                </div>
+            <div class="modal-body">
+                <form method="post" asp-action="Edit" >
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="MaNhanVien" name="id" id="editEmployeeId" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="HoTen" class="control-label">Tên người dùng:</label>
+                                    <input asp-for="HoTen" type="text" name="HoTen" placeholder="Nhập Họ và Tên" class="form-control" id="editEmployeeHoTen" required/>
+                                    <span asp-validation-for="HoTen" class="text-danger"></span>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label asp-for="NgaySinh" class="control-label">Ngày Sinh:</label>
+                                    <input asp-for="NgaySinh" type="text" name="NgaySinh" placeholder="Nhập Ngày Sinh (dd/mm/yyyy)" class="form-control" id="editEmployeeNgaySinh"required/>
+                                    <span asp-validation-for="NgaySinh" class="text-danger error-message"></span>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label asp-for="SoDienThoai" class="control-label">Số điện thoại:</label>
+                                    <input asp-for="SoDienThoai" type="text" name="SoDienThoai" placeholder="Nhập Số Điện Thoại" class="form-control" id="editEmployeeSoDienThoai"required pattern="\d{10,11}" title="Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)." />
+                                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                                </div>
+                                <br />
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="DiaChi" class="control-label">Địa chỉ:</label>
+                                    <input asp-for="DiaChi" type="text" name="DiaChi" placeholder="Nhập Địa Chỉ" class="form-control" id="editEmployeeDiaChi"required/>
+                                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                                </div>
+                                <br>
+                                <div>
+                                    <label asp-for="ChucVu" >Chức vụ:</label>
+                                    <input asp-for="ChucVu" type="text" name="ChucVu" placeholder="Nhập Chức vụ" class="form-control" id="editEmployeeChucVu"required/>
+                                    <span asp-validation-for="ChucVu" class="text-danger"></span>
+                                </div>
+                                <br>
+                                <div>
+                                    <label asp-for="SoNamCongTac" >Số Năm Công tác:</label>
+                                    <input asp-for="SoNamCongTac" type="number" name="SoNamCongTac" placeholder="Nhập Số năm công tác" class="form-control" id="editEmployeeSoNamCongTac"required/>
+                                    <span asp-validation-for="SoNamCongTac" class="text-danger"></span>
+                                </div>
+                                <br>
+                                
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-chance">
+                                <div class="form-group">
+                                    <button type="submit" class="green-btn" > Lưu </button>
+                                    <button type="button" class="red-btn" data-bs-dismiss="modal" aria-label="Close">Hủy</button>
+                                </div>
+                            </div>
+                        </div>
+                </form>
             </div>
         </div>
     </div>
-</form>
-
-
+</div>
+<script src="~/js/ValidDate.js"></script>
+<script src="~/js/DuplicateCheck.js"></script>

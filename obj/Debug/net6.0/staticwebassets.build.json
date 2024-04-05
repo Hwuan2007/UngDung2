@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NvwesTx8C0dSo8QNTPdGS9beuPwQWG0SHyki522+hKs=",
+  "Hash": "7SgHixPS8T8Z+OAt1arcTwi49q3mxwM0fmVWOp24vX4=",
   "Source": "hocvieccuccangMVC",
   "BasePath": "_content/hocvieccuccangMVC",
   "Mode": "Default",
@@ -112,12 +112,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\StaffLayouts.css",
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\StaffLayout.css",
       "SourceId": "hocvieccuccangMVC",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
       "BasePath": "_content/hocvieccuccangMVC",
-      "RelativePath": "css/StaffLayouts.css",
+      "RelativePath": "css/StaffLayout.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -128,7 +128,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\StaffLayouts.css"
+      "OriginalItemSpec": "wwwroot\\css\\StaffLayout.css"
     },
     {
       "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\favicon.ico",
@@ -186,6 +186,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\DeleteMessage.js"
+    },
+    {
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\DuplicateCheck.js",
+      "SourceId": "hocvieccuccangMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
+      "BasePath": "_content/hocvieccuccangMVC",
+      "RelativePath": "js/DuplicateCheck.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\DuplicateCheck.js"
+    },
+    {
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\editEmployee.js",
+      "SourceId": "hocvieccuccangMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
+      "BasePath": "_content/hocvieccuccangMVC",
+      "RelativePath": "js/editEmployee.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\editEmployee.js"
     },
     {
       "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\SearchStaff.js",

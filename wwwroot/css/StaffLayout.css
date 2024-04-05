@@ -5,23 +5,22 @@
     color: #252422;
     margin-bottom: 20px;
     position: relative;
-    z-index: 1;
     margin-top: 20px;
 }
 
-    .card .header {
-        padding: 20px 20px 0;
-    }
+.card .header {
+    padding: 20px 20px 0;
+}
 
-    .card .title {
-        margin: 0;
-        color: #252422;
-        font-weight: 300;
-    }
+.card .title {
+    margin: 0;
+    color: #252422;
+    font-weight: 300;
+}
 
-    .card .content {
-        padding: 15px 15px 10px;
-    }
+.card .content {
+    padding: 15px 15px 10px;
+}
 
 .table {
     width: 100%;
@@ -41,6 +40,9 @@ table {
 .table-full-width {
     margin-left: -15px;
     margin-right: -15px;
+}
+.card .content {
+    width: max-content;
 }
 
 .card button {
@@ -107,11 +109,11 @@ table {
     border-top-right-radius: 0; /* Loại bỏ viền tròn ở góc trên bên phải của input */
     border-bottom-right-radius: 0;
 }
-.form-control:focus {
+/* .form-control:focus {
     border-color: #dee2e6 !important;
     outline: none !important;
     box-shadow: none !important;
-}
+} */
 
 
 #Search {

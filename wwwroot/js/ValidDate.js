@@ -5,7 +5,7 @@ $(document).ready(function() {
         $('input[required]').each(function() {
             if (!$(this).val()) {
                 isValidForm = false;
-                $(this).next('.text-danger').text('Vui lòng điền đầy đủ thông tin.').show();
+                $(this).next('.text-danger').text('Vui lòng điền đầy đủ thông tin!!!.').show();
             } else {
                 $(this).next('.text-danger').hide();
             }
@@ -21,6 +21,14 @@ $(document).ready(function() {
             return false;
         } else {
             $('#NgaySinh').next('.text-danger').hide();
+        }
+
+        var soDienThoai = $('#SoDienThoai').val();
+        if (!isValidPhoneNumber(soDienThoai)) {
+            $('#SoDienThoai').next('.text-danger').text('Số điện thoại không hợp lệ.').show();
+            return false;
+        } else {
+            $('#SoDienThoai').next('.text-danger').hide();
         }
     });
 
@@ -47,5 +55,10 @@ $(document).ready(function() {
         }
 
         return true;
+    }
+
+    function isValidPhoneNumber(phoneNumber) {
+        var pattern = /^\d{10,11}$/;
+        return pattern.test(phoneNumber);
     }
 });

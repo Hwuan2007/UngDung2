@@ -9,67 +9,67 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = hocvieccuccangMVC
 build_property.RootNamespace = hocvieccuccangMVC
-build_property.ProjectDir = C:\xampp\htdocs\hocvieccuccangMVC\
+build_property.ProjectDir = c:\xampp\htdocs\hocvieccuccangMVC\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\xampp\htdocs\hocvieccuccangMVC
+build_property.MSBuildProjectDirectory = c:\xampp\htdocs\hocvieccuccangMVC
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Home/Index.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Home/Privacy.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/Error.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_CreateLayout.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_CreateLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DcmVhdGVMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_EditLayout.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_EditLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9FZGl0TGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_StaffLayout.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_StaffLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TdGFmZkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/Create.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/Edit.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/Index.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/Report.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/Report.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcUmVwb3J0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/_ViewImports.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/_ViewStart.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_Layout.cshtml]
+[c:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-g141vz9wuc

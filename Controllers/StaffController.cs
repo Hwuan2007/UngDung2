@@ -1,6 +1,7 @@
 using hocvieccuccangMVC.DataAccess;
 using hocvieccuccangMVC.Extensions;
 using hocvieccuccangMVC.Models;
+using hocvieccuccangMVC.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,18 +30,26 @@ public class StaffController : Controller
     {
         var session = _httpContextAccessor.HttpContext.Session;
         var danhSachNhanVien = session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+
         if (danhSachNhanVien == null || !danhSachNhanVien.Any())
         {
             return Content("Không có nhân viên nào trong danh sách.");
         }
-        return View(danhSachNhanVien);
+
+        var viewModel = new NhanVienViewModel
+        {
+            DanhSachNhanVien = danhSachNhanVien
+        };
+
+        return View(viewModel);
+
     }
 
     [HttpGet]
     [Route("Create")]
     public IActionResult Create()
     {
-        return View();
+        return View(new NhanVien());
     }
 
     [HttpPost]
@@ -65,7 +74,7 @@ public class StaffController : Controller
     }
 
     [HttpGet]
-    [Route("Edit/{id}")]
+    [Route("Edit")]
     public IActionResult Edit(string id)
     {
         var danhSachNhanVien = HttpContext.Session.GetObject<List<NhanVien>>("DanhSachNhanVien");
@@ -78,7 +87,7 @@ public class StaffController : Controller
     }
 
     [HttpPost]
-    [Route("Edit/{id}")]
+    [Route("Edit")]
     public IActionResult Edit(string id, NhanVien updatedNhanVien)
     {
         if (ModelState.IsValid)
@@ -119,6 +128,19 @@ public class StaffController : Controller
         }
         return RedirectToAction("Index");
     }
+
+    [HttpGet]
+    public IActionResult CheckDuplicate(string hoTen, string ngaySinh)
+    {
+        var danhSachNhanVien = HttpContext.Session.GetObject<List<NhanVien>>("DanhSachNhanVien");
+        if (danhSachNhanVien != null)
+        {
+            bool exists = danhSachNhanVien.Any(nv => nv.HoTen == hoTen && nv.NgaySinh == ngaySinh);
+            return Json(new { exists = exists });
+        }
+        return Json(new { exists = false });
+    }
+
 
     public IActionResult Report()
     {
