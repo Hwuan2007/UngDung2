@@ -1,5 +1,6 @@
-@using hocvieccuccangMVC.Models;
+
 @model hocvieccuccangMVC.ViewModels.NhanVienViewModel
+@using X.PagedList.Mvc.Core;
 
 <!DOCTYPE html>
 <html>
@@ -56,29 +57,10 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach (var nhanVien in Model.DanhSachNhanVien)
-                                        {
-                                            <tr>
-                                                <td>@(nhanVien.MaNhanVien)</td>
-                                                <td>@(nhanVien.HoTen)</td>
-                                                <td>@(nhanVien.NgaySinh)</td>
-                                                <td>@(nhanVien.SoDienThoai)</td>
-                                                <td>@(nhanVien.DiaChi)</td>
-                                                <td>@(nhanVien.ChucVu)</td>
-                                                <td>@(nhanVien.SoNamCongTac)</td>
-                                                <td>
-                                                    <button class="yellow-btn" style="display: inline-block;" data-bs-toggle="modal" data-bs-target="#editEmployeeModal" 
-                                                    onclick="editEmployee('@nhanVien.MaNhanVien', '@nhanVien.HoTen', '@nhanVien.NgaySinh', '@nhanVien.SoDienThoai', '@nhanVien.DiaChi', '@nhanVien.ChucVu', '@nhanVien.SoNamCongTac')">
-                                                        Sửa
-                                                    </button>
-                                                    <button class="red-btn" style="display: inline-block;" onclick="confirmDelete('@nhanVien.MaNhanVien')">
-                                                        <a asp-action="Delete" asp-route-id="@nhanVien.MaNhanVien">Xóa</a>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
+
+                                        <div id="employeeList">
+                                            @Html.Partial("_EmployeeTablePartial", Model.DanhSachNhanVien)
+                                        </div>
                                 </table>
                             </div>
                             <!-- Modaladd -->
@@ -86,6 +68,28 @@
                             <!-- Modaledit -->
                             @Html.Partial("Edit", Model.NhanVien)
                             
+<div class="text-center" style="display:flex;justify-content:center">
+    <nav aria-label="Page navigation" >
+        <ul class="pagination">
+            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
                         </div>
                     </div>
                 </div>
@@ -101,4 +105,32 @@
 <script src="~/js/DeleteMessage.js"></script>
 <script src="~/js/editEmployee.js"></script>
 
+<script>
+$(document).ready(function () {
+    // Hàm loadEmployeeList sẽ được gọi khi click vào một trang mới
+    function loadEmployeeList(page) {
+        $.ajax({
+            url: '@Url.Action("GetPartialEmployeeList", "Staff")',
+            type: 'GET',
+            data: { page: page },
+            success: function (result) {
+                $('#employeeList').html(result); // Cập nhật phần danh sách nhân viên
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
 
+    // Sự kiện click trên các liên kết chuyển trang trong phần tử .pagination
+    $(document).on('click', '.pagination .page-link', function (event) {
+        event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
+        var page = $(this).data('page'); // Lấy số trang từ thuộc tính data-page của thẻ a
+        loadEmployeeList(page); // Gọi hàm loadEmployeeList để cập nhật danh sách nhân viên
+    });
+
+    // Gọi hàm loadEmployeeList khi trang được load lần đầu tiên
+    loadEmployeeList(1);
+});
+
+</script>

@@ -40,3 +40,17 @@ C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\hocvieccuccangMVC.pdb
 C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\hocvieccuccangMVC.genruntimeconfig.cache
 C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\ref\hocvieccuccangMVC.dll
 C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\hocvieccuccangMVC.sourcelink.json
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Dapper.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Npgsql.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\xampp\htdocs\hocvieccuccangMVC\obj\Debug\net6.0\hocvieccuccangMVC.MvcApplicationPartsAssemblyInfo.cs
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\X.PagedList.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\X.PagedList.Mvc.Common.dll
+C:\xampp\htdocs\hocvieccuccangMVC\bin\Debug\net6.0\X.PagedList.Mvc.Core.dll

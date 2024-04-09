@@ -7,7 +7,6 @@ function editEmployee(MaNhanVien, HoTen, NgaySinh, SoDienThoai, DiaChi, ChucVu, 
     $('#editEmployeeDiaChi').val(DiaChi);
     $('#editEmployeeChucVu').val(ChucVu);
     $('#editEmployeeSoNamCongTac').val(SoNamCongTac);
-    
 
     // Show the edit modal
     $('#editEmployeeModal').modal('show');

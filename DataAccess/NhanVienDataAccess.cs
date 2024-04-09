@@ -15,61 +15,61 @@ namespace hocvieccuccangMVC.DataAccess
             _httpContextAccessor = httpContextAccessor;
         }
         private Random random = new Random();
-        private List<NhanVien> danhSachNhanVien = new List<NhanVien>(); // Khai báo danh sách nhân viên
+        //     private List<NhanVien> danhSachNhanVien = new List<NhanVien>(); // Khai báo danh sách nhân viên
 
-        public List<NhanVien> GetNhanViens()
-        {
-            return danhSachNhanVien;
-        }
-        public List<NhanVien> nhanvienngaunhien()
-        {
-            List<NhanVien> danhSachNhanVien = new List<NhanVien>();
-            for (int i = 0; i < 5; i++)
-            {
-                NhanVien nhanVien = new NhanVien();
-                nhanVien.MaNhanVien = "NV-" + (i + 1).ToString("0000");
-                nhanVien.HoTen = "Nhân viên " + (i + 1);
-                nhanVien.NgaySinh = NgaySinh();
-                nhanVien.SoDienThoai = SoDienThoai();
-                nhanVien.DiaChi = "Địa chỉ nhân viên " + (i + 1);
-                nhanVien.ChucVu = "Chức vụ nhân viên " + (i + 1);
-                nhanVien.SoNamCongTac = random.Next(1, 10);
+        //     public List<NhanVien> GetNhanViens()
+        //     {
+        //         return danhSachNhanVien;
+        //     }
+        //     public List<NhanVien> nhanvienngaunhien()
+        //     {
+        //         List<NhanVien> danhSachNhanVien = new List<NhanVien>();
+        //         for (int i = 0; i < 5; i++)
+        //         {
+        //             NhanVien nhanVien = new NhanVien();
+        //             nhanVien.MaNhanVien = "NV-" + (i + 1).ToString("0000");
+        //             nhanVien.HoTen = "Nhân viên " + (i + 1);
+        //             nhanVien.NgaySinh = NgaySinh();
+        //             nhanVien.SoDienThoai = SoDienThoai();
+        //             nhanVien.DiaChi = "Địa chỉ nhân viên " + (i + 1);
+        //             nhanVien.ChucVu = "Chức vụ nhân viên " + (i + 1);
+        //             nhanVien.SoNamCongTac = random.Next(1, 10);
 
-                danhSachNhanVien.Add(nhanVien);
-            }
-            return danhSachNhanVien;
-        }
+        //             danhSachNhanVien.Add(nhanVien);
+        //         }
+        //         return danhSachNhanVien;
+        //     }
 
-        public string UpdateMaNhanVien()
-        {
-            var session = _httpContextAccessor.HttpContext.Session;
-            var danhSachNhanVien = session.GetObject<List<NhanVien>>("DanhSachNhanVien") ?? new List<NhanVien>();
-            string maNhanVienMoi;
+        //     public string UpdateMaNhanVien()
+        //     {
+        //         var session = _httpContextAccessor.HttpContext.Session;
+        //         var danhSachNhanVien = session.GetObject<List<NhanVien>>("DanhSachNhanVien") ?? new List<NhanVien>();
+        //         string maNhanVienMoi;
 
-            if (danhSachNhanVien.Any())
-            {
-                string maxId = danhSachNhanVien.Select(nv => nv.MaNhanVien).Max();
-                string numId = maxId.Substring(3);
-                int currentNum = int.Parse(numId);
-                int nextNum = currentNum + 1;
-                maNhanVienMoi = "NV-" + nextNum.ToString("0000");
+        //         if (danhSachNhanVien.Any())
+        //         {
+        //             string maxId = danhSachNhanVien.Select(nv => nv.MaNhanVien).Max();
+        //             string numId = maxId.Substring(3);
+        //             int currentNum = int.Parse(numId);
+        //             int nextNum = currentNum + 1;
+        //             maNhanVienMoi = "NV-" + nextNum.ToString("0000");
 
-                // Kiểm tra xem mã nhân viên mới đã tồn tại trong danh sách chưa
-                while (danhSachNhanVien.Any(nv => nv.MaNhanVien == maNhanVienMoi))
-                {
-                    // Nếu mã đã tồn tại, tạo mã mới
-                    currentNum = int.Parse(maNhanVienMoi.Substring(3));
-                    currentNum++;
-                    maNhanVienMoi = "NV-" + currentNum.ToString("0000");
-                }
-            }
-            else
-            {
-                maNhanVienMoi = "NV-0001";
-            }
+        //             // Kiểm tra xem mã nhân viên mới đã tồn tại trong danh sách chưa
+        //             while (danhSachNhanVien.Any(nv => nv.MaNhanVien == maNhanVienMoi))
+        //             {
+        //                 // Nếu mã đã tồn tại, tạo mã mới
+        //                 currentNum = int.Parse(maNhanVienMoi.Substring(3));
+        //                 currentNum++;
+        //                 maNhanVienMoi = "NV-" + currentNum.ToString("0000");
+        //             }
+        //         }
+        //         else
+        //         {
+        //             maNhanVienMoi = "NV-0001";
+        //         }
 
-            return maNhanVienMoi;
-        }
+        //         return maNhanVienMoi;
+        //     }
 
         //Tạo giới hạn cho ngày sinh 
         private string NgaySinh()
