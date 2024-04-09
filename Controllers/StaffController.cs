@@ -41,17 +41,9 @@ public class StaffController : Controller
             PageCount = danhSachNhanVien.PageCount
         };
 
-        return View(viewModel);
+        return View(viewModel); // Trả về view với đối tượng kiểu NhanVienViewModel
     }
-    public IActionResult GetPartialEmployeeList(int? page)
-    {
-        int pageSize = 10;
-        int pageNumber = page ?? 1;
 
-        var danhSachNhanVien = _context.NhanViens.OrderBy(nv => nv.Id).ToPagedList(pageNumber, pageSize);
-
-        return PartialView("_EmployeeListPartial", danhSachNhanVien);
-    }
 
 
     [HttpGet]

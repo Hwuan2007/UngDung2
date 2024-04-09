@@ -122,3 +122,43 @@ table {
     display: flex;
 
 }
+
+
+/* Định dạng cơ bản cho nút */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+}
+
+.pagination li {
+    margin: 0 20px; /* Khoảng cách giữa các nút */
+}
+
+.pagination a,
+.pagination span {
+    color: #7ac29a;
+    text-decoration: none;
+    padding: 4px 12px;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    border: 1px solid #7ac29a;
+}
+
+/* Hiệu ứng hover khi di chuột vào nút */
+.pagination a:hover,
+.pagination span:hover {
+    background-color: #7ac29a;
+    color: #fff;
+}
+
+/* Hiệu ứng cho nút bị vô hiệu hóa */
+.pagination .disabled a,
+.pagination .disabled span {
+    pointer-events: none;
+    background-color: #f2f2f2;
+    color: #6c757d;
+}
