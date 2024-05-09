@@ -15,20 +15,20 @@ $(document).ready(function() {
             return false;
         }
 
-        var ngaySinh = $('#NgaySinh').val();
-        if (!isValidDate(ngaySinh)) {
-            $('#NgaySinh').next('.text-danger').text('Định dạng ngày sinh không hợp lệ. Vui lòng nhập lại theo định dạng dd/mm/yyyy.').show();
+        var ngay_sinh = $('#ngay_sinh').val();
+        if (!isValidDate(ngay_sinh)) {
+            $('#ngay_sinh').next('.text-danger').text('Định dạng ngày sinh không hợp lệ. Vui lòng nhập lại theo định dạng dd/mm/yyyy.').show();
             return false;
         } else {
-            $('#NgaySinh').next('.text-danger').hide();
+            $('#ngay_sinh').next('.text-danger').hide();
         }
 
-        var soDienThoai = $('#SoDienThoai').val();
-        if (!isValidPhoneNumber(soDienThoai)) {
-            $('#SoDienThoai').next('.text-danger').text('Số điện thoại không hợp lệ.').show();
+        var so_dien_thoai = $('#so_dien_thoai').val();
+        if (!isValidPhoneNumber(so_dien_thoai)) {
+            $('#so_dien_thoai').next('.text-danger').text('Số điện thoại không hợp lệ.').show();
             return false;
         } else {
-            $('#SoDienThoai').next('.text-danger').hide();
+            $('#so_dien_thoai').next('.text-danger').hide();
         }
     });
 

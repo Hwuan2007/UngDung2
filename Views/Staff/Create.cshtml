@@ -1,3 +1,4 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model hocvieccuccangMVC.Models.NhanVien
 
 <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
@@ -13,41 +14,52 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="HoTen" class="control-label">Tên người dùng:</label>
-                                <input asp-for="HoTen" type="text" placeholder="Nhập Họ và Tên" class="form-control" required />
-                                <span asp-validation-for="HoTen" class="text-danger"></span>
+                                <label asp-for="ho_ten" class="control-label">Tên người dùng:</label>
+                                <input asp-for="ho_ten" type="text" placeholder="Nhập Họ và Tên" class="form-control" required />
+                                <span asp-validation-for="ho_ten" class="text-danger"></span>
                             </div>
                             <br />
                             <div class="form-group">
-                                <label asp-for="NgaySinh" class="control-label">Ngày Sinh:</label>
-                                <input asp-for="NgaySinh" type="text" placeholder="Nhập Ngày Sinh (dd/mm/yyyy)" class="form-control" required />
-                                <span asp-validation-for="NgaySinh" class="text-danger error-message"></span>
+                                <label asp-for="ngay_sinh" class="control-label">Ngày Sinh:</label>
+                                <input asp-for="ngay_sinh" type="text" placeholder="Nhập Ngày Sinh (dd/mm/yyyy)" class="form-control" required />
+                                <span asp-validation-for="ngay_sinh" class="text-danger error-message"></span>
                             </div>
                             <br />
                             <div class="form-group">
-                                <label asp-for="SoDienThoai" class="control-label">Số điện thoại:</label>
-                                <input asp-for="SoDienThoai" type="text" placeholder="Nhập Số Điện Thoại" class="form-control" required pattern="\d{10,11}" title="Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)." />
-                                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                                <label asp-for="so_dien_thoai" class="control-label">Số điện thoại:</label>
+                                <input asp-for="so_dien_thoai" type="text" placeholder="Nhập Số Điện Thoại" class="form-control" required pattern="\d{10,11}" title="Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)." />
+                                <span asp-validation-for="so_dien_thoai" class="text-danger"></span>
                             </div>
                             <br />
+                            <div class="form-group">
+                                <label asp-for="phong_ban_id" class="control-label">Phòng ban:</label>
+                                <select asp-for="phong_ban_id" name="phong_ban_id" class="form-control" required>
+                                    @foreach (var phongBan in ViewBag.PhongBanList)
+                                    {
+                                        <option value="@phongBan.pb_id">@phongBan.ten_phong_ban</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="phong_ban_id" class="text-danger"></span>
+                            </div>
+                            <br>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="DiaChi" class="control-label">Địa chỉ:</label>
-                                <input asp-for="DiaChi" type="text" placeholder="Nhập Địa Chỉ" class="form-control" required />
-                                <span asp-validation-for="DiaChi" class="text-danger"></span>
+                                <label asp-for="dia_chi" class="control-label">Địa chỉ:</label>
+                                <input asp-for="dia_chi" type="text" placeholder="Nhập Địa Chỉ" class="form-control" required />
+                                <span asp-validation-for="dia_chi" class="text-danger"></span>
                             </div>
                             <br />
                             <div class="form-group">
-                                <label asp-for="ChucVu" class="control-label">Chức vụ:</label>
-                                <input asp-for="ChucVu" type="text" placeholder="Nhập Chức vụ" class="form-control" required />
-                                <span asp-validation-for="ChucVu" class="text-danger"></span>
+                                <label asp-for="chuc_vu" class="control-label">Chức vụ:</label>
+                                <input asp-for="chuc_vu" type="text" placeholder="Nhập Chức vụ" class="form-control" required />
+                                <span asp-validation-for="chuc_vu" class="text-danger"></span>
                             </div>
                             <br />
                             <div class="form-group">
-                                <label asp-for="SoNamCongTac" class="control-label">Số Năm Công tác:</label>
-                                <input asp-for="SoNamCongTac" type="number" placeholder="Nhập Số năm công tác" class="form-control" required />
-                                <span asp-validation-for="SoNamCongTac" class="text-danger"></span>
+                                <label asp-for="so_nam_cong_tac" class="control-label">Số Năm Công tác:</label>
+                                <input asp-for="so_nam_cong_tac" type="number" placeholder="Nhập Số năm công tác" class="form-control" required />
+                                <span asp-validation-for="so_nam_cong_tac" class="text-danger"></span>
                             </div>
                             <br />
                         </div>

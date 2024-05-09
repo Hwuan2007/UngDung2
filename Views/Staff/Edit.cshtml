@@ -1,5 +1,5 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model hocvieccuccangMVC.Models.NhanVien
+@model hocvieccuccangMVC.ViewModels.NhanVienViewModel
 
 <div class="modal fade" id="editEmployeeModal" tabindex="-1" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -11,48 +11,71 @@
             <div class="modal-body">
                 <form method="post" asp-action="Edit" >
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" name="id" id="editEmployeeId" />
+                    <input type="hidden" asp-for="NhanVien.nv_id" name="NhanVien.nv_id" id="editEmployeeId" />
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="HoTen" class="control-label">Tên người dùng:</label>
-                                    <input asp-for="HoTen" type="text" name="HoTen" placeholder="Nhập Họ và Tên" class="form-control" id="editEmployeeHoTen" required/>
-                                    <span asp-validation-for="HoTen" class="text-danger"></span>
+                                    <label asp-for="NhanVien.ho_ten" class="control-label">Tên người dùng:</label>
+                                    <input asp-for="NhanVien.ho_ten" type="text" name="HoTen" placeholder="Nhập Họ và Tên" class="form-control" id="editEmployeeHoTen" required/>
+                                    <span asp-validation-for="NhanVien.ho_ten" class="text-danger"></span>
                                 </div>
                                 <br />
                                 <div class="form-group">
-                                    <label asp-for="NgaySinh" class="control-label">Ngày Sinh:</label>
-                                    <input asp-for="NgaySinh" type="text" name="NgaySinh" placeholder="Nhập Ngày Sinh (dd/mm/yyyy)" class="form-control" id="editEmployeeNgaySinh"required/>
-                                    <span asp-validation-for="NgaySinh" class="text-danger error-message"></span>
+                                    <label asp-for="NhanVien.ngay_sinh" class="control-label">Ngày Sinh:</label>
+                                    <input asp-for="NhanVien.ngay_sinh" type="text" name="NgaySinh" placeholder="Nhập Ngày Sinh (dd/mm/yyyy)" class="form-control" id="editEmployeeNgaySinh"required/>
+                                    <span asp-validation-for="NhanVien.ngay_sinh" class="text-danger error-message"></span>
                                 </div>
                                 <br />
                                 <div class="form-group">
-                                    <label asp-for="SoDienThoai" class="control-label">Số điện thoại:</label>
-                                    <input asp-for="SoDienThoai" type="text" name="SoDienThoai" placeholder="Nhập Số Điện Thoại" class="form-control" id="editEmployeeSoDienThoai"required pattern="\d{10,11}" title="Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)." />
-                                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                                    <label asp-for="NhanVien.so_dien_thoai" class="control-label">Số điện thoại:</label>
+                                    <input asp-for="NhanVien.so_dien_thoai" type="text" name="SoDienThoai" placeholder="Nhập Số Điện Thoại" class="form-control" id="editEmployeeSoDienThoai"required pattern="\d{10,11}" title="Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)." />
+                                    <span asp-validation-for="NhanVien.so_dien_thoai" class="text-danger"></span>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <label asp-for="NhanVien.phong_ban_id" class="control-label">Phòng ban:</label>
+                                    @{
+                                        var phongBanList = ViewBag.PhongBanList as List<PhongBan>; // Lấy danh sách phòng ban từ ViewBag
+                                    }
+                                    <select asp-for="NhanVien.phong_ban_id" class="form-control">
+                                        <option value="">Chọn phòng ban</option>
+                                        @if (ViewBag.PhongBanList != null)
+                                        {
+                                            foreach (var phongBan in ViewBag.PhongBanList)
+                                            {
+                                                <option value="@phongBan.pb_id">@phongBan.ten_phong_ban</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="" disabled>Không có dữ liệu</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="NhanVien.phong_ban_id" class="text-danger"></span>
                                 </div>
                                 <br />
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="DiaChi" class="control-label">Địa chỉ:</label>
-                                    <input asp-for="DiaChi" type="text" name="DiaChi" placeholder="Nhập Địa Chỉ" class="form-control" id="editEmployeeDiaChi"required/>
-                                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                                    <label asp-for="NhanVien.dia_chi" class="control-label">Địa chỉ:</label>
+                                    <input asp-for="NhanVien.dia_chi" type="text" name="DiaChi" placeholder="Nhập Địa Chỉ" class="form-control" id="editEmployeeDiaChi"required/>
+                                    <span asp-validation-for="NhanVien.dia_chi" class="text-danger"></span>
                                 </div>
                                 <br>
                                 <div>
-                                    <label asp-for="ChucVu" >Chức vụ:</label>
-                                    <input asp-for="ChucVu" type="text" name="ChucVu" placeholder="Nhập Chức vụ" class="form-control" id="editEmployeeChucVu"required/>
-                                    <span asp-validation-for="ChucVu" class="text-danger"></span>
+                                    <label asp-for="NhanVien.chuc_vu" >Chức vụ:</label>
+                                    <input asp-for="NhanVien.chuc_vu" type="text" name="ChucVu" placeholder="Nhập Chức vụ" class="form-control" id="editEmployeeChucVu"required/>
+                                    <span asp-validation-for="NhanVien.chuc_vu" class="text-danger"></span>
                                 </div>
                                 <br>
                                 <div>
-                                    <label asp-for="SoNamCongTac" >Số Năm Công tác:</label>
-                                    <input asp-for="SoNamCongTac" type="number" name="SoNamCongTac" placeholder="Nhập Số năm công tác" class="form-control" id="editEmployeeSoNamCongTac"required/>
-                                    <span asp-validation-for="SoNamCongTac" class="text-danger"></span>
+                                    <label asp-for="NhanVien.so_nam_cong_tac" >Số Năm Công tác:</label>
+                                    <input asp-for="NhanVien.so_nam_cong_tac" type="number" name="SoNamCongTac" placeholder="Nhập Số năm công tác" class="form-control" id="editEmployeeSoNamCongTac"required/>
+                                    <span asp-validation-for="NhanVien.so_nam_cong_tac" class="text-danger"></span>
                                 </div>
                                 <br>
                                 
+                                <br>
                             </div>
                         </div>
                         <div class="modal-footer">

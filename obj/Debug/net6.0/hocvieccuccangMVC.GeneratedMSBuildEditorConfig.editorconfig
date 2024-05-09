@@ -30,10 +30,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_CreateLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DcmVhdGVMYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/xampp/htdocs/hocvieccuccangMVC/Views/Shared/_EditLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9FZGl0TGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,10 +56,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/Report.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcUmVwb3J0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/xampp/htdocs/hocvieccuccangMVC/Views/Staff/_EmployeeList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcX0VtcGxveWVlTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/xampp/htdocs/hocvieccuccangMVC/Views/_ViewImports.cshtml]

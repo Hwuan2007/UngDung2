@@ -6,15 +6,16 @@ using hocvieccuccangMVC.DataAccess;
 using hocvieccuccangMVC.Extensions;
 using hocvieccuccangMVC.db;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using Npgsql;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Thêm dòng sau để đăng ký DbContext
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 // Add services to the container.
