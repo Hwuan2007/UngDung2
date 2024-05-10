@@ -28,12 +28,12 @@ public class StaffController : Controller
     private readonly NhanVienDataAccess _nhanVienDataAccess;
     private readonly IDbConnection _dbConnection;
 
-    private List<PhongBan> GetPhongBanList()
+    public List<PhongBan> GetPhongBanList()
     {
-        var phongBanList = _context.phong_ban.ToList();
+        string query = "SELECT * FROM phong_ban";
+        var phongBanList = _dbConnection.Query<PhongBan>(query).ToList();
         return phongBanList;
     }
-
     public StaffController(NhanVienDataAccess nhanVienDataAccess, IHttpContextAccessor httpContextAccessor, IDbConnection dbConnection)
     {
         _httpContextAccessor = httpContextAccessor;
@@ -41,19 +41,30 @@ public class StaffController : Controller
         _dbConnection = dbConnection;
 
     }
-    public IActionResult Index(int? pb_id, int? page)
+    public IActionResult Index(int? pb_id, int? page, string search)
     {
         int pageSize = 10;
         int pageNumber = page ?? 1;
+        ViewBag.SelectedPhongBan = pb_id; // Cập nhật giá trị của phòng ban được chọn
+        ViewBag.SearchTerm = search; // Cập nhật giá trị của từ khóa tìm kiếm
 
-        string query = "SELECT n.*, p.ten_phong_ban FROM nhan_vien n LEFT JOIN phong_ban p ON n.phong_ban_id = p.pb_id";
-        // Kiểm tra xem pb_id có giá trị không
+        string query = "SELECT n.*, p.ten_phong_ban FROM nhan_vien n LEFT JOIN phong_ban p ON n.phong_ban_id = p.pb_id WHERE 1 = 1";
+
+        // Kiểm tra xem có yêu cầu tìm kiếm hay không
+        if (!string.IsNullOrEmpty(search))
+        {
+            query += $" AND (n.ho_ten LIKE '%{search}%' OR n.dia_chi LIKE '%{search}%')";
+        }
+
+        // Kiểm tra pb_id có giá trị không
         if (pb_id.HasValue)
         {
-            query += $" WHERE n.phong_ban_id = {pb_id}";
+            query += $" AND n.phong_ban_id = {pb_id}";
         }
+
         // Thêm điều kiện sắp xếp theo mã nhân viên tăng dần
         query += " ORDER BY n.nv_id ASC";
+
         // Thực hiện truy vấn và chuyển kết quả sang danh sách phân trang
         var danhSachNhanVien = _dbConnection.Query<NhanVien, PhongBan, NhanVien>(
             query,
@@ -64,6 +75,7 @@ public class StaffController : Controller
             },
             splitOn: "ten_phong_ban"
         ).ToPagedList(pageNumber, pageSize);
+
         // Truy vấn danh sách phòng ban và gán vào ViewBag hoặc ViewModel
         var phongBanList = _dbConnection.Query<PhongBan>("SELECT * FROM phong_ban").ToList();
         ViewBag.PhongBanList = phongBanList;
@@ -76,8 +88,18 @@ public class StaffController : Controller
             PhongBanList = phongBanList
         };
 
-        return View(viewModel);
+        // Trả về một phản hồi JSON nếu yêu cầu là AJAX
+        if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+        {
+            return PartialView("_EmployeeTable", viewModel);
+        }
+        else
+        {
+            return View(viewModel);
+        }
     }
+
+
 
     [HttpGet]
     [Route("Create")]
@@ -96,12 +118,8 @@ public class StaffController : Controller
     {
         if (!ModelState.IsValid)
         {
-            // Nếu ModelState không hợp lệ, trả về view với model và danh sách phòng ban
-            var phongBanList = _dbConnection.Query<PhongBan>("SELECT * FROM phong_ban").ToList();
-            ViewBag.PhongBanList = phongBanList;
             return View(viewModel);
         }
-
         try
         {
             // Kiểm tra xem phòng ban đã được chọn hay không
@@ -110,7 +128,6 @@ public class StaffController : Controller
                 ModelState.AddModelError("", "Vui lòng chọn phòng ban.");
                 return View(viewModel);
             }
-
             // Thực hiện thêm mới nhân viên bằng cách thực thi câu lệnh SQL INSERT INTO
             string sql = @"INSERT INTO nhan_vien (ho_ten, ngay_sinh, so_dien_thoai, dia_chi, chuc_vu, so_nam_cong_tac, phong_ban_id) 
                         VALUES (@ho_ten, @ngay_sinh, @so_dien_thoai, @dia_chi, @chuc_vu, @so_nam_cong_tac, @phong_ban_id)";
@@ -129,24 +146,28 @@ public class StaffController : Controller
     }
 
     [HttpGet]
-    [Route("Edit")]
     public IActionResult Edit(int id)
     {
-        // Truy vấn thông tin nhân viên cần chỉnh sửa
-        var nhanVien = _dbConnection.QueryFirstOrDefault<NhanVien>("SELECT * FROM nhan_vien WHERE nv_id = @Id", new { Id = id });
+        var nhanVien = _dbConnection.QueryFirstOrDefault<NhanVien>(
+            "SELECT n.*, p.* FROM nhan_vien n LEFT JOIN phong_ban p ON n.phong_ban_id = p.pb_id WHERE nv_id = @Id",
+            new { Id = id }
+        );
+
         if (nhanVien == null)
         {
             return NotFound(); // Trả về trang 404 nếu không tìm thấy nhân viên
         }
-        // Lấy danh sách phòng ban
-        var phongBanList = _dbConnection.Query<PhongBan>("SELECT * FROM phong_ban").ToList();
-        ViewBag.PhongBanList = phongBanList;
-        // Trả về view chỉnh sửa với thông tin của nhân viên được tìm thấy
-        return View(nhanVien);
+
+        // Tạo viewModel và truyền dữ liệu vào
+        var viewModel = new NhanVienViewModel
+        {
+            NhanVien = nhanVien,
+            PhongBanList = GetPhongBanList() ?? new List<PhongBan>() // Kiểm tra nếu GetPhongBanList() trả về null thì gán một danh sách phòng ban trống
+        };
+        return View(viewModel);
     }
 
     [HttpPost]
-    [Route("Edit")]
     public IActionResult Edit(int id, NhanVien updatedNhanVien)
     {
         if (ModelState.IsValid)
@@ -154,7 +175,18 @@ public class StaffController : Controller
             try
             {
                 // Cập nhật thông tin của nhân viên
-                _dbConnection.Execute("UPDATE nhan_vien SET ho_ten = @ho_ten, ngay_sinh = @ngay_sinh, so_dien_thoai = @so_dien_thoai, dia_chi = @dia_chi, chuc_vu = @chuc_vu, so_nam_cong_tac = @so_nam_cong_tac WHERE nv_id = @Id", new
+                string sql = @"UPDATE nhan_vien 
+                    SET ho_ten = @ho_ten, 
+                        ngay_sinh = @ngay_sinh, 
+                        so_dien_thoai = @so_dien_thoai, 
+                        dia_chi = @dia_chi, 
+                        chuc_vu = @chuc_vu, 
+                        so_nam_cong_tac = @so_nam_cong_tac, 
+                        phong_ban_id = @phong_ban_id 
+                    WHERE nv_id = @nv_id";
+
+                // Thực thi câu lệnh SQL với tham số được truyền vào từ đối tượng updatedNhanVien
+                _dbConnection.Execute(sql, new
                 {
                     ho_ten = updatedNhanVien.ho_ten,
                     ngay_sinh = updatedNhanVien.ngay_sinh,
@@ -162,7 +194,8 @@ public class StaffController : Controller
                     dia_chi = updatedNhanVien.dia_chi,
                     chuc_vu = updatedNhanVien.chuc_vu,
                     so_nam_cong_tac = updatedNhanVien.so_nam_cong_tac,
-                    Id = id
+                    phong_ban_id = updatedNhanVien.phong_ban_id,
+                    nv_id = id
                 });
 
                 // Redirect người dùng đến trang Index sau khi chỉnh sửa thành công

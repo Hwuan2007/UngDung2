@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VS5DTdiUH8HY4UeG+rczAuC2DvdnaRKoklxGY46UKJI=",
+  "Hash": "EXikUe+317MUA6JwrCr1LQ4D9eAvImO1XYgtML34GCY=",
   "Source": "hocvieccuccangMVC",
   "BasePath": "_content/hocvieccuccangMVC",
   "Mode": "Default",
@@ -112,12 +112,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\StaffLayouts.css",
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\StaffLayout.css",
       "SourceId": "hocvieccuccangMVC",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
       "BasePath": "_content/hocvieccuccangMVC",
-      "RelativePath": "css/StaffLayouts.css",
+      "RelativePath": "css/StaffLayout.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -128,7 +128,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\StaffLayouts.css"
+      "OriginalItemSpec": "wwwroot\\css\\StaffLayout.css"
     },
     {
       "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\favicon.ico",
@@ -207,12 +207,12 @@
       "OriginalItemSpec": "wwwroot\\js\\DuplicateCheck.js"
     },
     {
-      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\editEmployee.js",
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\editEmployeee.js",
       "SourceId": "hocvieccuccangMVC",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
       "BasePath": "_content/hocvieccuccangMVC",
-      "RelativePath": "js/editEmployee.js",
+      "RelativePath": "js/editEmployeee.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -223,15 +223,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\editEmployee.js"
+      "OriginalItemSpec": "wwwroot\\js\\editEmployeee.js"
     },
     {
-      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\SearchStaff.js",
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\PbDropDown.js",
       "SourceId": "hocvieccuccangMVC",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
       "BasePath": "_content/hocvieccuccangMVC",
-      "RelativePath": "js/SearchStaff.js",
+      "RelativePath": "js/PbDropDown.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -242,7 +242,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\SearchStaff.js"
+      "OriginalItemSpec": "wwwroot\\js\\PbDropDown.js"
     },
     {
       "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\site.js",

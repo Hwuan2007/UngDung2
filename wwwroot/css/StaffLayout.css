@@ -169,3 +169,9 @@ table {
     display: flex;
     margin-right: 10px;
 }
+.pagination-btn {
+    padding: 0 5px; /* Tăng khoảng cách giữa các nút chuyển trang */
+    /* Nếu bạn muốn chỉ định độ rộng của các nút, bạn có thể sử dụng thuộc tính width */
+    /* width: 40px; */
+}
+

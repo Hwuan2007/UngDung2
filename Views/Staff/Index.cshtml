@@ -7,16 +7,18 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" type="text/css" href="~/css/StaffLayouts.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/StaffLayout.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 
 </head>
+
 <body>
     <div>
         <div class="content">
@@ -28,27 +30,41 @@
                                 <h4 class="title">Danh Sách Nhân Viên</h4>
                                 <br />
                                 <div>
-                                    <button type="button" class="green-btn" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                                    <button type="button" class="green-btn" data-bs-toggle="modal"
+                                        data-bs-target="#addEmployeeModal">
                                         <i class="bx bxs-plus-circle"></i>
                                         Thêm Nhân viên mới
                                     </button>
-                                    
-                                    <div class="form-group" id="Search">
-                                        <input type="text" id="searchInput" placeholder="Tìm kiếm" class="form-control" />
-                                        <button class="green-btn" onclick="search()">
-                                            <i class='bx bx-search' style="vertical-align: middle;"></i>
-                                            Tìm Kiếm
-                                        </button>
-                                    </div>
+
+                                    @* <div class="form-group" id="Search">
+                                    <input type="text" id="searchInput" placeholder="Tìm kiếm"
+                                    class="form-control" />
+                                    <button class="green-btn" onclick="search()">
+                                    <i class='bx bx-search' style="vertical-align: middle;"></i>
+                                    Tìm Kiếm
+                                    </button>
+                                    </div> *@
+                                    <form asp-controller="Staff" asp-action="Index" method="get">
+                                        <div class="form-group" id="Search">
+                                            <input type="text" name="search"
+                                                placeholder="Tìm kiếm theo tên hoặc địa chỉ" class="form-control" />
+                                            <button type="submit" class="green-btn">
+                                                <i class='bx bx-search' style="vertical-align: middle;"></i>
+                                                Tìm Kiếm
+                                            </button>
+                                        </div>
+                                    </form>
+
+
                                 </div>
 
                                 <br />
                                 <p id="message" style="color: red;">@TempData["Message"]</p>
                             </div>
 
-                            <div div class="container-fluid" >
+                            <div div class="container-fluid">
                                 @{
-                                    var phongBanList = ViewBag.PhongBanList as List<PhongBan>; // Lấy danh sách phòng ban từ ViewBag
+                                    var phongBanList = ViewBag.PhongBanList as List<PhongBan>; // Lấy danh sách phòng ban
                                 }
                                 <select id="phongBan" name="phongBan">
                                     <option value="">Tất cả</option>
@@ -74,7 +90,7 @@
                                             <th>Địa chỉ</th>
                                             <th>Chức vụ</th>
                                             <th>Số năm công tác</th>
-                                            <th>Tên phòng ban</th> 
+                                            <th>Tên phòng ban</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -89,13 +105,15 @@
                                                 <td>@nhanVien.dia_chi</td>
                                                 <td>@nhanVien.chuc_vu</td>
                                                 <td>@nhanVien.so_nam_cong_tac</td>
-                                                <td>@nhanVien.phong_ban.ten_phong_ban</td>                                                
+                                                <td>@nhanVien.phong_ban.ten_phong_ban</td>
                                                 <td>
-                                                    <button class="yellow-btn" style="display: inline-block;" data-bs-toggle="modal" data-bs-target="#editEmployeeModal" 
-                                                    onclick="editEmployee('@nhanVien.nv_id', '@nhanVien.ho_ten', '@nhanVien.ngay_sinh', '@nhanVien.so_dien_thoai', '@nhanVien.dia_chi', '@nhanVien.chuc_vu', '@nhanVien.so_nam_cong_tac')">
+                                                    <button class="yellow-btn" style="display: inline-block;"
+                                                        data-bs-toggle="modal" data-bs-target="#editEmployeeModal"
+                                                        onclick="editEmployee('@nhanVien.nv_id', '@nhanVien.ho_ten', '@nhanVien.ngay_sinh', '@nhanVien.so_dien_thoai', '@nhanVien.dia_chi', '@nhanVien.chuc_vu', '@nhanVien.so_nam_cong_tac')">
                                                         Sửa
                                                     </button>
-                                                    <button class="red-btn" style="display: inline-block;" onclick="confirmDelete('@nhanVien.nv_id')">
+                                                    <button class="red-btn" style="display: inline-block;"
+                                                        onclick="confirmDelete('@nhanVien.nv_id')">
                                                         <a asp-action="Delete" asp-route-id="@nhanVien.nv_id">Xóa</a>
                                                     </button>
                                                 </td>
@@ -108,7 +126,7 @@
                             <div class="container-fluid">
                                 <button type="button" id="export-btn" class="blue-btn">
                                     <a href="@Url.Action("ExportToExcel", "Staff")">
-                                         Xuất Excel <i class='bx bx-table'></i>
+                                        Xuất Excel <i class='bx bx-table'></i>
                                     </a>
                                 </button>
                             </div>
@@ -118,40 +136,53 @@
                             <!-- Modaledit -->
                             @Html.Partial("Edit", Model.NhanVien)
 
-                        <!-- Phân trang -->
-                        <div class="pagination">
-                            @if (Model.PageNumber > 1)
-                            {
-                                <a href="@Url.Action("Index", "Staff", new { page = 1 })">First</a>
-                            }
+                            <!-- Phân trang -->
+                            <div class="pagination">
+                                @if (Model.PageNumber > 1)
+                                {
+                                    <div class="pagination-btn">
+                                        <a
+                                            href="@Url.Action("Index", new { page = 1, pb_id = ViewBag.SelectedPhongBan, search = ViewBag.SearchTerm })">
+                                            <i class='bx bx-first-page'></i>
+                                        </a>
+                                    </div>
+                                }
 
-                            @for (int i = 1; i <= Model.PageCount; i++)
-                            {
-                                @if (i == Model.PageNumber)
+                                @for (int i = 1; i <= Model.PageCount; i++)
                                 {
-                                    <span class="active" style="color: #fff;background-color: #7ac29a;">@i</span> 
+                                    <div class="pagination-btn">
+                                        @if (i == Model.PageNumber)
+                                        {
+                                            <span class="active" style="color: #fff;background-color: #7ac29a;">@i</span>
+                                        }
+                                        else
+                                        {
+                                            <a
+                                                href="@Url.Action("Index", new { page = i, pb_id = ViewBag.SelectedPhongBan, search = ViewBag.SearchTerm })">@i</a>
+                                        }
+                                    </div>
                                 }
-                                else
+                                @if (Model.PageNumber < Model.PageCount)
                                 {
-                                    <a href="@Url.Action("Index", "Staff", new { page = i })">@i</a>
+                                    <div class="pagination-btn">
+                                        <a
+                                            href="@Url.Action("Index", new { page = Model.PageCount, pb_id = ViewBag.SelectedPhongBan, search = ViewBag.SearchTerm })">
+                                            <i class='bx bx-last-page'></i>
+                                        </a>
+                                    </div>
                                 }
-                            }
-                            @if (Model.PageNumber < Model.PageCount)
-                            {
-                                <a href="@Url.Action("Index", "Staff", new { page = Model.PageCount })">Last</a>
-                            }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
+
 </html>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="~/js/SearchStaff.js"></script>
 <script src="~/js/ConfirmDelete.js"></script>
 <script src="~/js/DeleteMessage.js"></script>
-<script src="~/js/editEmployee.js"></script>
-
+<script src="~/js/editEmployeee.js"></script>
+<script src="~/js/PbDropDown.js"></script>

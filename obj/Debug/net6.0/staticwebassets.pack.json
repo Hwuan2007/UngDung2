@@ -13,8 +13,8 @@
       "PackagePath": "staticwebassets\\css\\EditLayout.css"
     },
     {
-      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\StaffLayouts.css",
-      "PackagePath": "staticwebassets\\css\\StaffLayouts.css"
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\StaffLayout.css",
+      "PackagePath": "staticwebassets\\css\\StaffLayout.css"
     },
     {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\site.css",
@@ -37,16 +37,16 @@
       "PackagePath": "staticwebassets\\js\\DuplicateCheck.js"
     },
     {
-      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\SearchStaff.js",
-      "PackagePath": "staticwebassets\\js\\SearchStaff.js"
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\PbDropDown.js",
+      "PackagePath": "staticwebassets\\js\\PbDropDown.js"
     },
     {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\ValidDate.js",
       "PackagePath": "staticwebassets\\js\\ValidDate.js"
     },
     {
-      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\editEmployee.js",
-      "PackagePath": "staticwebassets\\js\\editEmployee.js"
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\editEmployeee.js",
+      "PackagePath": "staticwebassets\\js\\editEmployeee.js"
     },
     {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\site.js",

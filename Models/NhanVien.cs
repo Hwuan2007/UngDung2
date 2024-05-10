@@ -15,7 +15,8 @@ namespace hocvieccuccangMVC.Models
 
         [ForeignKey("phong_ban_id")] // Sử dụng tên của cột khóa ngoại
         public int? phong_ban_id { get; set; }
-        public PhongBan phong_ban { get; set; }
+        [NotMapped]
+        public PhongBan? phong_ban { get; set; }
 
     }
 }
