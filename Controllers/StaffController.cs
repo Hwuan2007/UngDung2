@@ -172,6 +172,7 @@ public class StaffController : Controller
             var phongBanList = _dbConnection.Query<PhongBan>("SELECT * FROM phong_ban").ToList();
             ViewBag.PhongBanList = phongBanList;
             return View(updatedNhanVien);
+
         }
 
         try
@@ -188,17 +189,7 @@ public class StaffController : Controller
                         WHERE nv_id = @nv_id";
 
             // Thực thi câu lệnh SQL với tham số được truyền vào từ đối tượng updatedNhanVien
-            _dbConnection.Execute(sql, new
-            {
-                ho_ten = updatedNhanVien.ho_ten,
-                ngay_sinh = updatedNhanVien.ngay_sinh,
-                so_dien_thoai = updatedNhanVien.so_dien_thoai,
-                dia_chi = updatedNhanVien.dia_chi,
-                chuc_vu = updatedNhanVien.chuc_vu,
-                so_nam_cong_tac = updatedNhanVien.so_nam_cong_tac,
-                phong_ban_id = updatedNhanVien.phong_ban_id,
-                nv_id = id
-            });
+            _dbConnection.Execute(sql, updatedNhanVien);
 
             // Redirect người dùng đến trang Index sau khi chỉnh sửa thành công
             return RedirectToAction("Index");
