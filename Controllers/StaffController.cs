@@ -99,8 +99,6 @@ public class StaffController : Controller
         }
     }
 
-
-
     [HttpGet]
     [Route("Create")]
     public IActionResult Create()
@@ -149,7 +147,7 @@ public class StaffController : Controller
     public IActionResult Edit(int id)
     {
         var nhanVien = _dbConnection.QueryFirstOrDefault<NhanVien>(
-            "SELECT n.*, p.* FROM nhan_vien n LEFT JOIN phong_ban p ON n.phong_ban_id = p.pb_id WHERE nv_id = @Id",
+        "SELECT * FROM nhan_vien WHERE nv_id = @Id",
             new { Id = id }
         );
 
@@ -159,57 +157,60 @@ public class StaffController : Controller
         }
 
         // Tạo viewModel và truyền dữ liệu vào
-        var viewModel = new NhanVienViewModel
-        {
-            NhanVien = nhanVien,
-            PhongBanList = GetPhongBanList() ?? new List<PhongBan>() // Kiểm tra nếu GetPhongBanList() trả về null thì gán một danh sách phòng ban trống
-        };
-        return View(viewModel);
+        var phongBanList = _dbConnection.Query<PhongBan>("SELECT * FROM phong_ban").ToList();
+        ViewBag.PhongBanList = phongBanList;
+
+        return View(nhanVien);
     }
 
     [HttpPost]
     public IActionResult Edit(int id, NhanVien updatedNhanVien)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            try
-            {
-                // Cập nhật thông tin của nhân viên
-                string sql = @"UPDATE nhan_vien 
-                    SET ho_ten = @ho_ten, 
-                        ngay_sinh = @ngay_sinh, 
-                        so_dien_thoai = @so_dien_thoai, 
-                        dia_chi = @dia_chi, 
-                        chuc_vu = @chuc_vu, 
-                        so_nam_cong_tac = @so_nam_cong_tac, 
-                        phong_ban_id = @phong_ban_id 
-                    WHERE nv_id = @nv_id";
-
-                // Thực thi câu lệnh SQL với tham số được truyền vào từ đối tượng updatedNhanVien
-                _dbConnection.Execute(sql, new
-                {
-                    ho_ten = updatedNhanVien.ho_ten,
-                    ngay_sinh = updatedNhanVien.ngay_sinh,
-                    so_dien_thoai = updatedNhanVien.so_dien_thoai,
-                    dia_chi = updatedNhanVien.dia_chi,
-                    chuc_vu = updatedNhanVien.chuc_vu,
-                    so_nam_cong_tac = updatedNhanVien.so_nam_cong_tac,
-                    phong_ban_id = updatedNhanVien.phong_ban_id,
-                    nv_id = id
-                });
-
-                // Redirect người dùng đến trang Index sau khi chỉnh sửa thành công
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                // Xử lý lỗi nếu có
-                ModelState.AddModelError("", "Đã xảy ra lỗi khi cập nhật thông tin nhân viên: " + ex.Message);
-            }
+            // Nếu ModelState không hợp lệ, trả về view chỉnh sửa với model để người dùng nhập lại
+            var phongBanList = _dbConnection.Query<PhongBan>("SELECT * FROM phong_ban").ToList();
+            ViewBag.PhongBanList = phongBanList;
+            return View(updatedNhanVien);
         }
 
-        // Nếu dữ liệu không hợp lệ hoặc có lỗi, trả về view Edit với model để người dùng nhập lại
-        return View(updatedNhanVien);
+        try
+        {
+            // Thực hiện câu lệnh SQL UPDATE để cập nhật thông tin nhân viên
+            string sql = @"UPDATE nhan_vien 
+                        SET ho_ten = @ho_ten, 
+                            ngay_sinh = @ngay_sinh, 
+                            so_dien_thoai = @so_dien_thoai, 
+                            dia_chi = @dia_chi, 
+                            chuc_vu = @chuc_vu, 
+                            so_nam_cong_tac = @so_nam_cong_tac, 
+                            phong_ban_id = @phong_ban_id 
+                        WHERE nv_id = @nv_id";
+
+            // Thực thi câu lệnh SQL với tham số được truyền vào từ đối tượng updatedNhanVien
+            _dbConnection.Execute(sql, new
+            {
+                ho_ten = updatedNhanVien.ho_ten,
+                ngay_sinh = updatedNhanVien.ngay_sinh,
+                so_dien_thoai = updatedNhanVien.so_dien_thoai,
+                dia_chi = updatedNhanVien.dia_chi,
+                chuc_vu = updatedNhanVien.chuc_vu,
+                so_nam_cong_tac = updatedNhanVien.so_nam_cong_tac,
+                phong_ban_id = updatedNhanVien.phong_ban_id,
+                nv_id = id
+            });
+
+            // Redirect người dùng đến trang Index sau khi chỉnh sửa thành công
+            return RedirectToAction("Index");
+        }
+        catch (Exception ex)
+        {
+            // Xử lý lỗi nếu có
+            ModelState.AddModelError("", "Đã xảy ra lỗi khi cập nhật thông tin nhân viên: " + ex.Message);
+            var phongBanList = _dbConnection.Query<PhongBan>("SELECT * FROM phong_ban").ToList();
+            ViewBag.PhongBanList = phongBanList;
+            return View(updatedNhanVien);
+        }
     }
 
     public IActionResult Delete(int id)
@@ -232,12 +233,14 @@ public class StaffController : Controller
     }
 
     [HttpGet]
-    public IActionResult CheckDuplicate(string hoTen, string ngaySinh)
+    [HttpGet]
+    public IActionResult CheckDuplicate(string ho_ten, string ngay_sinh)
     {
-        var duplicate = _dbConnection.ExecuteScalar<bool>("SELECT COUNT(*) FROM nhan_vien WHERE ho_ten = @hoTen AND ngay_sinh = @ngaySinh", new { hoTen, ngaySinh });
-
+        var duplicate = _dbConnection.ExecuteScalar<bool>("SELECT COUNT(*) FROM nhan_vien WHERE ho_ten = @ho_ten AND ngay_sinh = @ngay_sinh", new { ho_ten, ngay_sinh });
         return Json(new { exists = duplicate });
     }
+
+
 
     public async Task<IActionResult> ExportToExcel()
     {

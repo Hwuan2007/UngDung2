@@ -10,7 +10,7 @@
                 <!-- Thêm nút đóng -->
             </div>
             <div class="modal-body">
-                <form method="post" asp-action="Create">
+                <form method="post" asp-action="Create" id="yourFormId">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
                         <div class="col-md-6">
@@ -31,8 +31,7 @@
                             <div class="form-group">
                                 <label asp-for="so_dien_thoai" class="control-label">Số điện thoại:</label>
                                 <input asp-for="so_dien_thoai" type="text" placeholder="Nhập Số Điện Thoại"
-                                    class="form-control" required pattern="\d{10,11}"
-                                    title="Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)." />
+                                    class="form-control" required />
                                 <span asp-validation-for="so_dien_thoai" class="text-danger"></span>
                             </div>
                             <br />
@@ -90,5 +89,5 @@
         </div>
     </div>
 </div>
-@* <script src="~/js/ValidDate.js"></script>
-<script src="~/js/DuplicateCheck.js"></script> *@
+<script src="~/js/ValidDate.js"></script>
+<script src="~/js/Duplicate.js"></script>

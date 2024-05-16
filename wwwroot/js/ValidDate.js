@@ -1,64 +1,45 @@
-$(document).ready(function() {
-    $('form').submit(function() {
-        var isValidForm = true;
+document.getElementById("yourFormId").addEventListener("submit", function (event) {
+    var ngaySinh = document.getElementById("ngay_sinh").value;
+    var soDienThoai = document.getElementById("so_dien_thoai").value;
 
-        $('input[required]').each(function() {
-            if (!$(this).val()) {
-                isValidForm = false;
-                $(this).next('.text-danger').text('Vui lòng điền đầy đủ thông tin!!!.').show();
-            } else {
-                $(this).next('.text-danger').hide();
-            }
-        });
-
-        if (!isValidForm) {
-            return false;
-        }
-
-        var ngay_sinh = $('#ngay_sinh').val();
-        if (!isValidDate(ngay_sinh)) {
-            $('#ngay_sinh').next('.text-danger').text('Định dạng ngày sinh không hợp lệ. Vui lòng nhập lại theo định dạng dd/mm/yyyy.').show();
-            return false;
-        } else {
-            $('#ngay_sinh').next('.text-danger').hide();
-        }
-
-        var so_dien_thoai = $('#so_dien_thoai').val();
-        if (!isValidPhoneNumber(so_dien_thoai)) {
-            $('#so_dien_thoai').next('.text-danger').text('Số điện thoại không hợp lệ.').show();
-            return false;
-        } else {
-            $('#so_dien_thoai').next('.text-danger').hide();
-        }
-    });
-
-    function isValidDate(dateString) {
-        var pattern = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
-        if (!pattern.test(dateString)) {
-            return false;
-        }
-
-        var parts = dateString.split('/');
-        var day = parseInt(parts[0], 10);
-        var month = parseInt(parts[1], 10);
-        var year = parseInt(parts[2], 10);
-
-        if (year < 1900 || year > (new Date()).getFullYear()) {
-            return false;
-        }
-        if (month < 1 || month > 12) {
-            return false;
-        }
-        var maxDays = (new Date(year, month, 0)).getDate();
-        if (day < 1 || day > maxDays) {
-            return false;
-        }
-
-        return true;
+    if (!isValidDate(ngaySinh)) {
+        alert("Vui lòng nhập đúng định dạng ngày tháng (dd/mm/yyyy)");
+        event.preventDefault(); // Ngăn chặn gửi form
+        return;
     }
 
-    function isValidPhoneNumber(phoneNumber) {
-        var pattern = /^\d{10,11}$/;
-        return pattern.test(phoneNumber);
+    if (!isValidPhoneNumber(soDienThoai)) {
+        alert("Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)");
+        event.preventDefault(); // Ngăn chặn gửi form
+        return;
     }
+
+    // Nếu dữ liệu hợp lệ, tiếp tục gửi form
 });
+
+// Validate định dạng ngày tháng
+function isValidDate(dateString) {
+    // Định dạng ngày tháng (dd/mm/yyyy)
+    var regex = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (!regex.test(dateString)) {
+        return false;
+    }
+    var parts = dateString.split("/");
+    var day = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
+    var year = parseInt(parts[2], 10);
+    if (year < 1000 || year > 3000 || month == 0 || month > 12) {
+        return false;
+    }
+    var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+        monthLength[1] = 29; // Năm nhuận
+    }
+    return day > 0 && day <= monthLength[month - 1];
+}
+
+// Validate số điện thoại
+function isValidPhoneNumber(phoneNumber) {
+    var regex = /^\d{10,11}$/; // Số điện thoại gồm 10 hoặc 11 chữ số
+    return regex.test(phoneNumber);
+}

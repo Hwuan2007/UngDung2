@@ -1,6 +1,8 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model hocvieccuccangMVC.Models.NhanVien
 
+
+
 <div class="modal fade" id="editEmployeeModal" tabindex="-1" aria-labelledby="editEmployeeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -10,9 +12,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" asp-action="Edit">
+                <form method="post" asp-action="Edit" id="yourFormId">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="nv_id" name="nv_id" />
+                    <input type="hidden" asp-for="nv_id" id="editEmployeeId" />
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -34,8 +36,7 @@
                                 <label asp-for="so_dien_thoai" class="control-label">Số điện thoại:</label>
                                 <input asp-for="so_dien_thoai" type="text" name="SoDienThoai"
                                     placeholder="Nhập Số Điện Thoại" class="form-control" id="editEmployeeSoDienThoai"
-                                    required pattern="\d{10,11}"
-                                    title="Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)." />
+                                    required />
                                 <span asp-validation-for="so_dien_thoai" class="text-danger"></span>
                             </div>
                             <br />
@@ -93,5 +94,5 @@
         </div>
     </div>
 </div>
-@* <script src="~/js/ValidDate.js"></script>
-<script src="~/js/DuplicateCheck.js"></script> *@
+<script src="~/js/ValidDate.js"></script>
+<script src="~/js/Duplicate.js"></script>

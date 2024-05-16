@@ -33,8 +33,8 @@
       "PackagePath": "staticwebassets\\js\\DeleteMessage.js"
     },
     {
-      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\DuplicateCheck.js",
-      "PackagePath": "staticwebassets\\js\\DuplicateCheck.js"
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\Duplicate.js",
+      "PackagePath": "staticwebassets\\js\\Duplicate.js"
     },
     {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\PbDropDown.js",
@@ -45,8 +45,8 @@
       "PackagePath": "staticwebassets\\js\\ValidDate.js"
     },
     {
-      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\editEmployeee.js",
-      "PackagePath": "staticwebassets\\js\\editEmployeee.js"
+      "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\editEmployee.js",
+      "PackagePath": "staticwebassets\\js\\editEmployee.js"
     },
     {
       "Id": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\site.js",

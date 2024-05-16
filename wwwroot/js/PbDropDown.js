@@ -24,3 +24,10 @@ $('#phongBan').change(function () {
         window.location.href = '/Staff/Index?pb_id=' + selectedPbId;
     }
 });
+$(document).ready(function () {
+    $('#phongBan').change(function () {
+        var selectedPhongBan = $(this).val();
+        $('#selectedPhongBan').val(selectedPhongBan);
+    });
+});
+

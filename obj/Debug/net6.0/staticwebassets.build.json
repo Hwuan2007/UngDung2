@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EXikUe+317MUA6JwrCr1LQ4D9eAvImO1XYgtML34GCY=",
+  "Hash": "wiWWdBOxTzabTUiw2u4mjR8JdWAFN6NaimZbexjuvlw=",
   "Source": "hocvieccuccangMVC",
   "BasePath": "_content/hocvieccuccangMVC",
   "Mode": "Default",
@@ -188,12 +188,12 @@
       "OriginalItemSpec": "wwwroot\\js\\DeleteMessage.js"
     },
     {
-      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\DuplicateCheck.js",
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\Duplicate.js",
       "SourceId": "hocvieccuccangMVC",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
       "BasePath": "_content/hocvieccuccangMVC",
-      "RelativePath": "js/DuplicateCheck.js",
+      "RelativePath": "js/Duplicate.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -204,15 +204,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\DuplicateCheck.js"
+      "OriginalItemSpec": "wwwroot\\js\\Duplicate.js"
     },
     {
-      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\editEmployeee.js",
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\editEmployee.js",
       "SourceId": "hocvieccuccangMVC",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
       "BasePath": "_content/hocvieccuccangMVC",
-      "RelativePath": "js/editEmployeee.js",
+      "RelativePath": "js/editEmployee.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -223,7 +223,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\editEmployeee.js"
+      "OriginalItemSpec": "wwwroot\\js\\editEmployee.js"
     },
     {
       "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\js\\PbDropDown.js",
