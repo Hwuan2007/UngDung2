@@ -236,7 +236,15 @@ public class StaffController : Controller
     public async Task<IActionResult> ExportToExcel()
     {
         // Truy vấn danh sách nhân viên từ cơ sở dữ liệu
-        var employees = await _dbConnection.QueryAsync<NhanVien>("SELECT * FROM nhan_vien");
+        var employees = await _dbConnection.QueryAsync<NhanVien, PhongBan, NhanVien>(
+        "SELECT n.*, p.* FROM nhan_vien n INNER JOIN phong_ban p ON n.phong_ban_id = p.pb_id",
+        (nv, pb) =>
+        {
+            nv.phong_ban = pb;
+            return nv;
+        },
+        splitOn: "pb_id"
+    );
 
         // Tạo một package Excel
         using (var package = new ExcelPackage())
@@ -251,6 +259,8 @@ public class StaffController : Controller
             worksheet.Cells["E1"].Value = "Địa chỉ";
             worksheet.Cells["F1"].Value = "Chức vụ";
             worksheet.Cells["G1"].Value = "Số năm công tác";
+            worksheet.Cells["H1"].Value = "Phòng ban";
+
 
             // Ghi dữ liệu vào các ô tương ứng
             int row = 2;
@@ -263,6 +273,7 @@ public class StaffController : Controller
                 worksheet.Cells[string.Format("E{0}", row)].Value = employee.dia_chi;
                 worksheet.Cells[string.Format("F{0}", row)].Value = employee.chuc_vu;
                 worksheet.Cells[string.Format("G{0}", row)].Value = employee.so_nam_cong_tac;
+                worksheet.Cells[string.Format("H{0}", row)].Value = employee.phong_ban.ten_phong_ban;
                 row++;
             }
 

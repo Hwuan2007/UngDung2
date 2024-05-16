@@ -67,7 +67,7 @@
                             <div>
                                 <label asp-for="so_nam_cong_tac">Số Năm Công tác:</label>
                                 <input asp-for="so_nam_cong_tac" type="number" class="form-control"
-                                    id="editEmployeeSoNamCongTac" required />
+                                    id="editEmployeeSoNamCongTac" required min="0" pattern="[0-9]+" />
                                 <span asp-validation-for="so_nam_cong_tac" class="text-danger"></span>
                             </div>
                             <br>
