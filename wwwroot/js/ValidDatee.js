@@ -1,6 +1,25 @@
-document.getElementById("yourFormId").addEventListener("submit", function (event) {
+document.getElementById("addEmployeeForm").addEventListener("submit", function (event) {
     var ngaySinh = document.getElementById("ngay_sinh").value;
     var soDienThoai = document.getElementById("so_dien_thoai").value;
+
+    if (!isValidDate(ngaySinh)) {
+        alert("Vui lòng nhập đúng định dạng ngày tháng (dd/mm/yyyy)");
+        event.preventDefault(); // Ngăn chặn gửi form
+        return;
+    }
+
+    if (!isValidPhoneNumber(soDienThoai)) {
+        alert("Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)");
+        event.preventDefault(); // Ngăn chặn gửi form
+        return;
+    }
+
+    // Nếu dữ liệu hợp lệ, tiếp tục gửi form
+});
+
+document.getElementById("editEmployeeForm").addEventListener("submit", function (event) {
+    var ngaySinh = document.getElementById("editEmployeeNgaySinh").value;
+    var soDienThoai = document.getElementById("editEmployeeSoDienThoai").value;
 
     if (!isValidDate(ngaySinh)) {
         alert("Vui lòng nhập đúng định dạng ngày tháng (dd/mm/yyyy)");

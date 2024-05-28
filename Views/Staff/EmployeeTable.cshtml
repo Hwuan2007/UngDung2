@@ -1,0 +1,42 @@
+@model hocvieccuccangMVC.ViewModels.NhanVienViewModel
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã nhân viên</th>
+            <th>Họ tên</th>
+            <th>Ngày sinh</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Chức vụ</th>
+            <th>Số năm công tác</th>
+            <th>Tên phòng ban</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="employeeTableBody">
+        @foreach (var nhanVien in Model.DanhSachNhanVien)
+        {
+            <tr>
+                <td>@nhanVien.nv_id</td>
+                <td>@nhanVien.ho_ten</td>
+                <td>@nhanVien.ngay_sinh</td>
+                <td>@nhanVien.so_dien_thoai</td>
+                <td>@nhanVien.dia_chi</td>
+                <td>@nhanVien.chuc_vu</td>
+                <td>@nhanVien.so_nam_cong_tac</td>
+                <td>@nhanVien.phong_ban.ten_phong_ban</td>
+                <td>
+                    <button class="yellow-btn" style="display: inline-block;" data-bs-toggle="modal"
+                        data-bs-target="#editEmployeeModal"
+                        onclick="editEmployee('@nhanVien.nv_id', '@nhanVien.ho_ten', '@nhanVien.ngay_sinh', '@nhanVien.so_dien_thoai', '@nhanVien.dia_chi', '@nhanVien.chuc_vu', '@nhanVien.so_nam_cong_tac', '@nhanVien.phong_ban_id')">
+                        Sửa
+                    </button>
+                    <button class="red-btn" style="display: inline-block;" onclick="confirmDelete('@nhanVien.nv_id')">
+                        <a asp-action="Delete" asp-route-id="@nhanVien.nv_id">Xóa</a>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

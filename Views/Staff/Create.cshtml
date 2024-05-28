@@ -7,10 +7,11 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="addEmployeeModalLabel">Thêm Nhân viên mới</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <span aria-hidden="true">&times;</span>
                 <!-- Thêm nút đóng -->
             </div>
             <div class="modal-body">
-                <form method="post" asp-action="Create" id="yourFormId">
+                <form method="post" asp-action="Create" id="addEmployeeForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
                         <div class="col-md-6">
@@ -40,9 +41,13 @@
                                 <select asp-for="phong_ban_id" name="phong_ban_id" class="form-control" required>
                                     @if (ViewBag.PhongBanList != null)
                                     {
+                                        <option value="" disabled selected hidden>chọn phòng ban</option>
                                         foreach (var phongBan in ViewBag.PhongBanList)
                                         {
-                                            <option value="@phongBan.pb_id">@phongBan.ten_phong_ban</option>
+                                            <option value="@phongBan.pb_id"
+                                                selected="@((phongBan.pb_id == ViewBag.SelectedPhongBan) ? "selected" : null)">
+                                                @phongBan.ten_phong_ban
+                                            </option>
                                         }
                                     }
                                 </select>
@@ -68,7 +73,7 @@
                             <div class="form-group">
                                 <label asp-for="so_nam_cong_tac" class="control-label">Số Năm Công tác:</label>
                                 <input asp-for="so_nam_cong_tac" type="number" placeholder="Nhập Số năm công tác"
-                                    class="form-control" required />
+                                    class="form-control" required min="0" pattern="[0-9]+" />
                                 <span asp-validation-for="so_nam_cong_tac" class="text-danger"></span>
                             </div>
                             <br />
@@ -89,5 +94,6 @@
         </div>
     </div>
 </div>
-<script src="~/js/ValidDate.js"></script>
-<script src="~/js/Duplicate.js"></script>
+<!-- Bao gồm thư viện jQuery trước các mã JavaScript khác -->
+
+@* <script src="~/js/Duplicates.js"></script> *@

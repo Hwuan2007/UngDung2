@@ -48,12 +48,14 @@ public class StaffController : Controller
         ViewBag.SelectedPhongBan = pb_id; // Cập nhật giá trị của phòng ban được chọn
         ViewBag.SearchTerm = search; // Cập nhật giá trị của từ khóa tìm kiếm
 
+
         string query = "SELECT n.*, p.ten_phong_ban FROM nhan_vien n LEFT JOIN phong_ban p ON n.phong_ban_id = p.pb_id WHERE 1 = 1";
 
         // Kiểm tra xem có yêu cầu tìm kiếm hay không
         if (!string.IsNullOrEmpty(search))
         {
-            query += $" AND (n.ho_ten LIKE '%{search}%' OR n.dia_chi LIKE '%{search}%')";
+            string searchLower = search.ToLower();
+            query += $" AND (LOWER(n.ho_ten) LIKE '%{searchLower}%' OR LOWER(n.dia_chi) LIKE '%{searchLower}%')";
         }
 
         // Kiểm tra pb_id có giá trị không
@@ -85,13 +87,13 @@ public class StaffController : Controller
             DanhSachNhanVien = danhSachNhanVien,
             PageNumber = pageNumber,
             PageCount = danhSachNhanVien.PageCount,
-            PhongBanList = phongBanList
+            PhongBanList = GetPhongBanList()
         };
 
         // Trả về một phản hồi JSON nếu yêu cầu là AJAX
         if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
         {
-            return PartialView("_EmployeeTable", viewModel);
+            return PartialView("EmployeeTable", viewModel);
         }
         else
         {
@@ -133,8 +135,8 @@ public class StaffController : Controller
             // Thực thi câu lệnh SQL với tham số được truyền vào từ đối tượng viewModel
             _dbConnection.Execute(sql, viewModel);
 
-            // Chuyển hướng về trang Index sau khi thêm mới thành công
-            return RedirectToAction("Index");
+            return Redirect(Request.Headers["Referer"].ToString());
+
         }
         catch (Exception ex)
         {
@@ -192,7 +194,7 @@ public class StaffController : Controller
             _dbConnection.Execute(sql, updatedNhanVien);
 
             // Redirect người dùng đến trang Index sau khi chỉnh sửa thành công
-            return RedirectToAction("Index");
+            return Redirect(Request.Headers["Referer"].ToString());
         }
         catch (Exception ex)
         {
@@ -213,7 +215,7 @@ public class StaffController : Controller
 
             // Redirect người dùng đến trang Index sau khi xóa thành công
             TempData["Message"] = "Nhân viên đã được xóa thành công.";
-            return RedirectToAction("Index");
+            return Redirect(Request.Headers["Referer"].ToString());
         }
         catch (Exception ex)
         {
@@ -227,43 +229,114 @@ public class StaffController : Controller
     [HttpGet]
     public IActionResult CheckDuplicate(string ho_ten, string ngay_sinh)
     {
-        var duplicate = _dbConnection.ExecuteScalar<bool>("SELECT COUNT(*) FROM nhan_vien WHERE ho_ten = @ho_ten AND ngay_sinh = @ngay_sinh", new { ho_ten, ngay_sinh });
-        return Json(new { exists = duplicate });
+        if (_dbConnection.ExecuteScalar<bool>("SELECT COUNT(*) FROM nhan_vien WHERE ho_ten = @ho_ten AND ngay_sinh = @ngay_sinh", new { ho_ten, ngay_sinh }))
+        {
+            return Json(new { exists = true });
+        }
+        else
+        {
+            return Json(new { exists = false });
+        }
     }
 
 
 
-    public async Task<IActionResult> ExportToExcel()
+    public async Task<IActionResult> ExportToExcel(int? pb_id, string search)
     {
+        // Tạo truy vấn cơ bản
+        string query = "SELECT n.*, p.ten_phong_ban FROM nhan_vien n LEFT JOIN phong_ban p ON n.phong_ban_id = p.pb_id WHERE 1 = 1";
+
+        // Kiểm tra xem có yêu cầu tìm kiếm hay không
+        if (!string.IsNullOrEmpty(search))
+        {
+            string searchLower = search.ToLower();
+            query += $" AND (LOWER(n.ho_ten) LIKE '%{searchLower}%' OR LOWER(n.dia_chi) LIKE '%{searchLower}%')";
+        }
+
+        // Kiểm tra pb_id có giá trị không
+        if (pb_id.HasValue)
+        {
+            query += $" AND n.phong_ban_id = {pb_id}";
+        }
+
+        // Thêm điều kiện sắp xếp theo mã nhân viên tăng dần
+        query += " ORDER BY n.nv_id ASC";
+
         // Truy vấn danh sách nhân viên từ cơ sở dữ liệu
         var employees = await _dbConnection.QueryAsync<NhanVien, PhongBan, NhanVien>(
-        "SELECT n.*, p.* FROM nhan_vien n INNER JOIN phong_ban p ON n.phong_ban_id = p.pb_id",
-        (nv, pb) =>
-        {
-            nv.phong_ban = pb;
-            return nv;
-        },
-        splitOn: "pb_id"
-    );
+            query,
+            (nv, pb) =>
+            {
+                nv.phong_ban = pb;
+                return nv;
+            },
+            splitOn: "ten_phong_ban"
+        );
+
+
 
         // Tạo một package Excel
         using (var package = new ExcelPackage())
         {
             var worksheet = package.Workbook.Worksheets.Add("Danh Sách Nhân Viên");
 
-            // Định dạng tiêu đề
-            worksheet.Cells["A1"].Value = "ID";
-            worksheet.Cells["B1"].Value = "Họ và tên";
-            worksheet.Cells["C1"].Value = "Ngày sinh";
-            worksheet.Cells["D1"].Value = "Số điện thoại";
-            worksheet.Cells["E1"].Value = "Địa chỉ";
-            worksheet.Cells["F1"].Value = "Chức vụ";
-            worksheet.Cells["G1"].Value = "Số năm công tác";
-            worksheet.Cells["H1"].Value = "Phòng ban";
+            // Thêm dòng tiêu đề động
+            string title = "Danh Sách Nhân Viên";
+            if (pb_id.HasValue || !string.IsNullOrEmpty(search))
+            {
+                title = "Danh Sách Nhân Viên";
+                if (pb_id.HasValue)
+                {
+                    var selectedPhongBan = (await _dbConnection.QueryAsync<PhongBan>("SELECT * FROM phong_ban WHERE pb_id = @Id", new { Id = pb_id })).FirstOrDefault();
+                    if (selectedPhongBan != null)
+                    {
+                        title += $" theo Phòng Ban: {selectedPhongBan.ten_phong_ban}";
+                    }
+                }
+                if (!string.IsNullOrEmpty(search))
+                {
+                    title += $" với Từ Khóa: '{search}'";
+                }
+            }
 
+            worksheet.Cells["A1"].Value = title;
+            worksheet.Cells["A1:H1"].Merge = true;
+            worksheet.Cells["A1"].Style.Font.Size = 14;
+            worksheet.Cells["A1"].Style.Font.Bold = true;
+            worksheet.Cells["A1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+            // Tô màu thanh tiêu đề
+            worksheet.Cells["A1:H1"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+            worksheet.Cells["A1:H1"].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+
+
+            // Định dạng tiêu đề
+            worksheet.Cells["A2"].Value = "ID";
+            worksheet.Cells["B2"].Value = "Họ và tên";
+            worksheet.Cells["C2"].Value = "Ngày sinh";
+            worksheet.Cells["D2"].Value = "Số điện thoại";
+            worksheet.Cells["E2"].Value = "Địa chỉ";
+            worksheet.Cells["F2"].Value = "Chức vụ";
+            worksheet.Cells["G2"].Value = "Số năm công tác";
+            worksheet.Cells["H2"].Value = "Phòng ban";
+
+            // Định Dạng về cột
+            using (var range = worksheet.Cells["A2:H2"])
+            {
+                range.Style.Font.Bold = true;
+                range.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                range.Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                range.Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                range.Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                range.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                range.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+
+                // Tô màu tiêu đề cột
+                range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+            }
 
             // Ghi dữ liệu vào các ô tương ứng
-            int row = 2;
+            int row = 3;
             foreach (var employee in employees)
             {
                 worksheet.Cells[string.Format("A{0}", row)].Value = employee.nv_id;
@@ -277,12 +350,22 @@ public class StaffController : Controller
                 row++;
             }
 
+            // Định dạng khung dữ liệu
+            using (var range = worksheet.Cells[string.Format("A2:H{0}", row - 1)])
+            {
+                range.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                range.Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                range.Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                range.Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            }
+
+            // Tự động điều chỉnh độ rộng cột cho khớp dữ liệu
+            worksheet.Cells.AutoFitColumns();
+
             // Tạo file Excel từ package và trả về cho người dùng
             return File(package.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "employees.xlsx");
         }
     }
-
-
 
     public IActionResult Report()
     {
