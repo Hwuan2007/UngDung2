@@ -12,7 +12,6 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using X.PagedList;
 using OfficeOpenXml;
 using Dapper;
 using System.Data;
