@@ -45,29 +45,36 @@ public class StaffController : Controller
     {
         int pageSize = 10;
         int pageNumber = page ?? 1;
+        int offset = (pageNumber - 1) * pageSize;
         ViewBag.SelectedPhongBan = pb_id; // Cập nhật giá trị của phòng ban được chọn
         ViewBag.SearchTerm = search; // Cập nhật giá trị của từ khóa tìm kiếm
 
-
-        string query = "SELECT n.*, p.ten_phong_ban FROM nhan_vien n LEFT JOIN phong_ban p ON n.phong_ban_id = p.pb_id WHERE 1 = 1";
+        string query = @"
+        SELECT n.*, p.pb_id, p.ten_phong_ban 
+        FROM nhan_vien n 
+        LEFT JOIN phong_ban p ON n.phong_ban_id = p.pb_id 
+        WHERE 1 = 1";
 
         // Kiểm tra xem có yêu cầu tìm kiếm hay không
         if (!string.IsNullOrEmpty(search))
         {
             string searchLower = search.ToLower();
-            query += $" AND (LOWER(n.ho_ten) LIKE '%{searchLower}%' OR LOWER(n.dia_chi) LIKE '%{searchLower}%')";
+            query += " AND (LOWER(n.ho_ten) LIKE @Search OR LOWER(n.dia_chi) LIKE @Search)";
         }
 
         // Kiểm tra pb_id có giá trị không
         if (pb_id.HasValue)
         {
-            query += $" AND n.phong_ban_id = {pb_id}";
+            query += " AND n.phong_ban_id = @pb_id";
         }
 
         // Thêm điều kiện sắp xếp theo mã nhân viên tăng dần
         query += " ORDER BY n.nv_id ASC";
 
-        // Thực hiện truy vấn và chuyển kết quả sang danh sách phân trang
+        // Thêm phân trang bằng OFFSET và FETCH
+        query += " OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+
+        // Thực hiện truy vấn và lấy kết quả
         var danhSachNhanVien = _dbConnection.Query<NhanVien, PhongBan, NhanVien>(
             query,
             (nv, pb) =>
@@ -75,8 +82,29 @@ public class StaffController : Controller
                 nv.phong_ban = pb;
                 return nv;
             },
-            splitOn: "ten_phong_ban"
-        ).ToPagedList(pageNumber, pageSize);
+            new { Offset = offset, PageSize = pageSize, Search = $"%{search}%", pb_id },
+            splitOn: "pb_id"
+        ).ToList();
+
+        // Lấy tổng số bản ghi để tính số trang
+        string countQuery = @"
+        SELECT COUNT(*) 
+        FROM nhan_vien n 
+        LEFT JOIN phong_ban p ON n.phong_ban_id = p.pb_id 
+        WHERE 1 = 1";
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            countQuery += " AND (LOWER(n.ho_ten) LIKE @Search OR LOWER(n.dia_chi) LIKE @Search)";
+        }
+
+        if (pb_id.HasValue)
+        {
+            countQuery += " AND n.phong_ban_id = @pb_id";
+        }
+
+        int totalRecords = _dbConnection.ExecuteScalar<int>(countQuery, new { Search = $"%{search}%", pb_id });
+        int pageCount = (int)Math.Ceiling((double)totalRecords / pageSize);
 
         // Truy vấn danh sách phòng ban và gán vào ViewBag hoặc ViewModel
         var phongBanList = _dbConnection.Query<PhongBan>("SELECT * FROM phong_ban").ToList();
@@ -86,8 +114,8 @@ public class StaffController : Controller
         {
             DanhSachNhanVien = danhSachNhanVien,
             PageNumber = pageNumber,
-            PageCount = danhSachNhanVien.PageCount,
-            PhongBanList = GetPhongBanList()
+            PageCount = pageCount,
+            PhongBanList = phongBanList
         };
 
         // Trả về một phản hồi JSON nếu yêu cầu là AJAX
@@ -100,6 +128,7 @@ public class StaffController : Controller
             return View(viewModel);
         }
     }
+
 
     [HttpGet]
     [Route("Create")]

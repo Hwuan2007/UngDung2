@@ -95,10 +95,11 @@
                                             var isActive = i == Model.PageNumber;
                                         }
                                         <a href="@Url.Action("Index", new { page = i, pb_id = ViewBag.SelectedPhongBan, search = ViewBag.SearchTerm })"
-                                            class="page-link @isActive">@i</a>
+                                            class="page-link @(isActive ? "active" : "")">@i</a>
                                     </div>
                                 }
                             </div>
+
 
                         </div>
                     </div>
