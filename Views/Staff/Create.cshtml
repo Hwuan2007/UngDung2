@@ -6,7 +6,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addEmployeeModalLabel">Thêm Nhân viên mới</h5>
-                <!-- Thêm nút đóng -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="post" asp-action="Create" id="addEmployeeForm">
@@ -23,14 +23,17 @@
                             <div class="form-group">
                                 <label asp-for="ngay_sinh" class="control-label">Ngày Sinh:</label>
                                 <input asp-for="ngay_sinh" type="text" placeholder="Nhập Ngày Sinh (dd/mm/yyyy)"
-                                    class="form-control" required />
+                                    class="form-control" id="ngay_sinh" required
+                                    pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$"
+                                    title="Vui lòng nhập đúng định dạng ngày tháng (dd/mm/yyyy)" />
                                 <span asp-validation-for="ngay_sinh" class="text-danger error-message"></span>
                             </div>
                             <br />
                             <div class="form-group">
                                 <label asp-for="so_dien_thoai" class="control-label">Số điện thoại:</label>
                                 <input asp-for="so_dien_thoai" type="text" placeholder="Nhập Số Điện Thoại"
-                                    class="form-control" required />
+                                    class="form-control" id="so_dien_thoai" required pattern="\d{10,11}"
+                                    title="Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 chữ số)" />
                                 <span asp-validation-for="so_dien_thoai" class="text-danger"></span>
                             </div>
                             <br />
@@ -92,6 +95,3 @@
         </div>
     </div>
 </div>
-<!-- Bao gồm thư viện jQuery trước các mã JavaScript khác -->
-
-@* <script src="~/js/Duplicates.js"></script> *@
