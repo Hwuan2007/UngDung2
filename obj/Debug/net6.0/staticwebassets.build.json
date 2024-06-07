@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SYnOVTsiLo01IufBJ6uLVXSqp4/J34mSrsw4fmPC8fg=",
+  "Hash": "L7LShJAKG6HATqmJhVIyR7snM4s3Nl5DSO1iU4VFj6M=",
   "Source": "hocvieccuccangMVC",
   "BasePath": "_content/hocvieccuccangMVC",
   "Mode": "Default",
@@ -112,12 +112,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\StaffLayouts.css",
+      "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\css\\StaffLayout.css",
       "SourceId": "hocvieccuccangMVC",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\",
       "BasePath": "_content/hocvieccuccangMVC",
-      "RelativePath": "css/StaffLayouts.css",
+      "RelativePath": "css/StaffLayout.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -128,7 +128,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\StaffLayouts.css"
+      "OriginalItemSpec": "wwwroot\\css\\StaffLayout.css"
     },
     {
       "Identity": "C:\\xampp\\htdocs\\hocvieccuccangMVC\\wwwroot\\favicon.ico",

@@ -154,6 +154,11 @@ table {
     background-color: #7ac29a;
     color: #fff;
 }
+.pagination a.active {
+    background-color: #7ac29a;
+    color: #fff;
+    border: #7ac29a;
+}
 
 /* Hiệu ứng cho nút bị vô hiệu hóa */
 .pagination .disabled a,
